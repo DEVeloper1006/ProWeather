@@ -4,7 +4,8 @@
   "description": "This is a weather-based app that uses an API to search the weather from all around the world and delivers all the important information that users need",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"npx tailwindcss -i ./src/input.css -o ./public/styles.css --watch"
   },
   "author": "",
   "license": "ISC",
