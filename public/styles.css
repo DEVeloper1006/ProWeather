@@ -556,6 +556,14 @@ video {
   margin: 2.5rem;
 }
 
+.mr-10{
+  margin-right: 2.5rem;
+}
+
+.mt-9{
+  margin-top: 2.25rem;
+}
+
 .flex{
   display: flex;
 }
@@ -568,6 +576,16 @@ video {
   width: 1.5rem;
 }
 
+.cursor-pointer{
+  cursor: pointer;
+}
+
+.select-none{
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
 .flex-wrap{
   flex-wrap: wrap;
 }
@@ -576,17 +594,20 @@ video {
   align-items: center;
 }
 
-.justify-between{
-  justify-content: space-between;
+.justify-center{
+  justify-content: center;
 }
 
-.gap-5{
-  gap: 1.25rem;
+.justify-evenly{
+  justify-content: space-evenly;
 }
 
-.border-slate-800{
-  --tw-border-opacity: 1;
-  border-color: rgb(30 41 59 / var(--tw-border-opacity));
+.gap-2{
+  gap: 0.5rem;
+}
+
+.rounded-2xl{
+  border-radius: 1rem;
 }
 
 .bg-slate-100{
@@ -594,13 +615,16 @@ video {
   background-color: rgb(241 245 249 / var(--tw-bg-opacity));
 }
 
-.font-body{
-  font-family: Poppins;
+.p-4{
+  padding: 1rem;
 }
 
-.text-lg{
-  font-size: 1.125rem;
-  line-height: 1.75rem;
+.align-middle{
+  vertical-align: middle;
+}
+
+.font-body{
+  font-family: Poppins;
 }
 
 .text-xl{
@@ -626,6 +650,10 @@ video {
 
 .duration-150{
   transition-duration: 150ms;
+}
+
+.ease-in{
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
 
 .ease-linear{
@@ -665,19 +693,19 @@ video {
 }
 
 .logo img {
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   padding: 15px;
 }
 
 .searchBar {
-  width: -moz-fit-content;
-  width: fit-content;
+  width: 50%;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .searchBar input {
   padding: 15px;
-  padding-right: 75px;
   outline: none;
   color: "#3D5A80";
   border-radius: 1rem;
@@ -716,11 +744,33 @@ video {
   transform: scale(1.06);
 }
 
-.searchBar input:not(:-moz-placeholder-shown)~ {
+.searchBar input:not(:-moz-placeholder-shown)~span {
   color: aliceblue;
+  z-index: 2;
 }
 
-.searchBar input:focus~.icon,
-.searchBar input:not(:placeholder-shown)~,.icon {
+.searchBar input:focus~span,
+.searchBar input:not(:placeholder-shown)~span {
   color: aliceblue;
+  z-index: 2;
+}
+
+.location {
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 50px;
+}
+
+.location:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(152 193 217 / var(--tw-bg-opacity));
+  --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  color: aliceblue;
+  transform: scale(1.06);
+}
+
+.menu {
+  width: 700px;
 }

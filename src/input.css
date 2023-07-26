@@ -22,18 +22,18 @@
 }
 
 .logo img {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     padding: 15px;
 }
 
 .searchBar {
-    width: fit-content;
+    width: 50%;
+    height: fit-content;
 }
 
 .searchBar input {
     padding: 15px;
-    padding-right: 75px;
     outline: none;
     color: "#3D5A80";
     @apply rounded-2xl transition duration-150 ease-linear bg-blue-50;
@@ -50,7 +50,23 @@
     transform: scale(1.06);
 }
 
-.searchBar input:focus~.icon,
-.searchBar input:not(:placeholder-shown)~,.icon {
+.searchBar input:focus~span,
+.searchBar input:not(:placeholder-shown)~span {
     color: aliceblue;
+    z-index: 2;
+}
+
+.location {
+    width: fit-content;
+    height: 50px;
+}
+
+.location:hover {
+    @apply bg-powderBlue shadow-2xl;
+    color: aliceblue;
+    transform: scale(1.06);
+}
+
+.menu {
+    width: 700px;
 }
