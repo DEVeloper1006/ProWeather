@@ -1,0 +1,14 @@
+{
+  "name": "sapphireweather",
+  "version": "1.0.0",
+  "description": "This is a weather-based app that uses an API to search the weather from all around the world and delivers all the important information that users need",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tailwindcss": "^3.3.3"
+  }
+}
