@@ -1,5 +1,56 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+header {
+    @apply flex gap-2 items-center justify-between flex-wrap;
+}
+
+.logo {
+    @apply w-40 h-40 transition ease-in duration-150 rounded-full ml-5;
+}
+
+.logo:hover {
+    transform: scale(1.1);
+    @apply bg-skyBlue;
+}
+
+.topMenu {
+    width: 70%;
+    @apply flex items-center justify-evenly p-4;
+}
+
+.searchBar {
+    width: fit-content;
+    @apply relative flex items-center;
+}
+
+.searchBar input {
+    @apply pt-2 pb-2 pl-5 pr-12 rounded-3xl outline-none border-sky-400 border-2 bg-slate-50 transition duration-150 ease-linear w-56;
+}
+
+.searchBar svg {
+    @apply absolute right-5 transition ease-in duration-700;
+}
+
+.searchBar input:focus,
+.searchBar input:valid {
+    transform: scale(1.1);
+    @apply bg-skyBlue text-slate-700;
+}
+
+.searchBar input:focus~svg,
+.searchBar input:valid~svg{
+    @apply right-3;
+}
+
+.location {
+    @apply transition ease-in duration-150 p-2 cursor-pointer rounded-full;
+}
+
+.location:hover {
+    transform: scale(1.1);
+    @apply bg-skyBlue;
+}
