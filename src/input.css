@@ -3,3 +3,24 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    background: url(/public/img/background.jpg);
+    background-size: cover;
+}
+
+.top-menu {
+    border: 2px solid red;
+    min-height: fit-content;
+    @apply flex flex-col justify-evenly items-center m-10 gap-5 pt-10;
+}
+
+.logo {
+    width: 75%;
+    min-height: fit-content;
+    @apply text-5xl select-none text-center;
+}
+
+.search-menu {
+    border: 2px solid black;
+    width: 75%;
+}
