@@ -3,6 +3,13 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+ 
 body {
     background: url(/public/img/background.jpg);
     background-size: cover;
@@ -51,13 +58,13 @@ body {
     @apply pt-3 pb-3 pl-5 pr-10 rounded-2xl transition duration-150 ease-linear;
 }
 
-.search input:focus,
-.search input:not(placeholder-shown) {
-    @apply shadow-2xl;
-}
-
 .search input::placeholder {
     @apply text-slate-50;
+}
+
+.search input:focus
+,.search input:not(:placeholder-shown) {
+    @apply shadow-gray-700 shadow-2xl;  
 }
 
 .search svg {
@@ -68,12 +75,37 @@ body {
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     background-color: rgba(0, 0,0, 0.1);
-    @apply rounded-full p-5 text-slate-50 cursor-pointer transition duration-150 ease-out; 
+    @apply rounded-full p-5 cursor-pointer transition duration-150 ease-out; 
 }
 
 .location:hover {
     transform: translateY(-5%);
     @apply shadow-2xl;
+}
+
+.location::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, transparent, white);
+    z-index: -1;
+    border-radius: inherit;
+}
+
+@keyframes border-animation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.location:hover::before {
+    animation: border-animation 2s linear infinite;
 }
 
 
