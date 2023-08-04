@@ -21,7 +21,7 @@ body {
 }
 
 .logo {
-    width: 75%;
+    width: fit-content;
     min-height: fit-content;
     @apply text-5xl select-none text-center rounded-3xl cursor-pointer;
     backdrop-filter: blur(10px);

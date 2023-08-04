@@ -591,7 +591,8 @@ body {
 }
 
 .logo {
-  width: 75%;
+  width: -moz-fit-content;
+  width: fit-content;
   min-height: -moz-fit-content;
   min-height: fit-content;
   cursor: pointer;
