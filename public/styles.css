@@ -552,6 +552,12 @@ video {
   width: 1.5rem;
 }
 
+.select-none{
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
 .bg-stone-950{
   --tw-bg-opacity: 1;
   background-color: rgb(12 10 9 / var(--tw-bg-opacity));
@@ -563,6 +569,21 @@ video {
 
 .font-body{
   font-family: Poppins;
+}
+
+.text-2xl{
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-5xl{
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.text-slate-100{
+  --tw-text-opacity: 1;
+  color: rgb(241 245 249 / var(--tw-text-opacity));
 }
 
 .text-slate-50{
@@ -702,7 +723,7 @@ video {
   background-color: rgba(0, 0,0, 0.1);
   cursor: pointer;
   border-radius: 9999px;
-  padding: 1.25rem;
+  padding: 0.5rem;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
@@ -759,4 +780,44 @@ video {
   100% {
     background-color: hsl(200, 20%, 95%);
   }
+}
+
+main {
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+  min-height: -moz-fit-content;
+  min-height: fit-content;
+  margin: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem;
+  border: 2px solid red;
+}
+
+#cityName {
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+  margin-bottom: 2.5rem;
+  padding: 0.5rem;
+}
+
+.weather-info{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 0.5rem;
+}
+
+.current-weather {
+  width: 350px;
+  height: 350px;
+  border: none;
+  outline: none;
+  background: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(255, 255,255, 0.1);
 }
