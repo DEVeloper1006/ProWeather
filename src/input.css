@@ -9,38 +9,27 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
- 
-body {
-    background: url(/public/img/background.jpg);
-    background-size: cover;
-}
 
 .top-menu {
-    min-height: fit-content;
-    @apply flex flex-col justify-evenly items-center m-5 mt-10 gap-5 p-10;
+    border: 2px solid red;
+    @apply flex flex-wrap justify-between items-center m-5 mt-10 gap-5 p-10;
 }
 
 .logo {
-    width: fit-content;
+    min-width: fit-content;
     min-height: fit-content;
-    @apply text-5xl select-none text-center rounded-3xl cursor-pointer;
+    @apply text-3xl select-none text-center rounded-3xl cursor-pointer;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    background-color: rgba(0, 0,0, 0.1);
-    @apply transition duration-150 ease-in p-5;
+    background-color: rgba(255, 255,255, 0.1);
+    @apply transition duration-150 ease-in;
 }
 
 .logo:hover {
     transform: translateY(-5%);
-    background-color: rgba(0, 0,0, 0.2);
-    @apply shadow-2xl;
+    @apply shadow-lg;
 }
 
-.search-menu {
-    width: 100%;
-    min-height: fit-content;
-    @apply flex flex-wrap gap-3 justify-evenly items-center p-10;
-}
 
 .search {
     @apply relative text-slate-50 flex items-center;
@@ -64,7 +53,7 @@ body {
 
 .search input:focus
 ,.search input:not(:placeholder-shown) {
-    @apply shadow-gray-700 shadow-2xl;  
+    @apply shadow-lg;  
 }
 
 .search svg {
@@ -80,7 +69,7 @@ body {
 
 .location:hover {
     transform: translateY(-5%);
-    @apply shadow-2xl;
+    @apply shadow-lg;
 }
 
 .location::before {
@@ -90,7 +79,7 @@ body {
     left: -2px;
     right: -2px;
     bottom: -2px;
-    background: linear-gradient(45deg, transparent, white);
+    background: linear-gradient(45deg, transparent, rgb(76, 76, 77));
     z-index: -1;
     border-radius: inherit;
 }

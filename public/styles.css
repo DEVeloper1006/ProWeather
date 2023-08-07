@@ -552,6 +552,11 @@ video {
   width: 1.5rem;
 }
 
+.bg-stone-950{
+  --tw-bg-opacity: 1;
+  background-color: rgb(12 10 9 / var(--tw-bg-opacity));
+}
+
 .p-4{
   padding: 1rem;
 }
@@ -572,27 +577,21 @@ video {
   font-family: 'Poppins', sans-serif;
 }
 
-body {
-  background: url(/public/img/background.jpg);
-  background-size: cover;
-}
-
 .top-menu {
-  min-height: -moz-fit-content;
-  min-height: fit-content;
+  border: 2px solid red;
   margin: 1.25rem;
   margin-top: 2.5rem;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   gap: 1.25rem;
   padding: 2.5rem;
 }
 
 .logo {
-  width: -moz-fit-content;
-  width: fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
   min-height: -moz-fit-content;
   min-height: fit-content;
   cursor: pointer;
@@ -601,12 +600,11 @@ body {
           user-select: none;
   border-radius: 1.5rem;
   text-align: center;
-  font-size: 3rem;
-  line-height: 1;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  background-color: rgba(0, 0,0, 0.1);
-  padding: 1.25rem;
+  background-color: rgba(255, 255,255, 0.1);
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
@@ -617,22 +615,9 @@ body {
 
 .logo:hover {
   transform: translateY(-5%);
-  background-color: rgba(0, 0,0, 0.2);
-  --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-  --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.search-menu {
-  width: 100%;
-  min-height: -moz-fit-content;
-  min-height: fit-content;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-evenly;
-  gap: 0.75rem;
-  padding: 2.5rem;
 }
 
 .search{
@@ -678,20 +663,16 @@ body {
 }
 
 .search input:not(:-moz-placeholder-shown){
-  --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-  --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-  --tw-shadow-color: #374151;
-  --tw-shadow: var(--tw-shadow-colored);
 }
 
 .search input:focus
 ,.search input:not(:placeholder-shown){
-  --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-  --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-  --tw-shadow-color: #374151;
-  --tw-shadow: var(--tw-shadow-colored);
 }
 
 .search svg{
@@ -716,8 +697,8 @@ body {
 
 .location:hover {
   transform: translateY(-5%);
-  --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-  --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -728,7 +709,7 @@ body {
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: linear-gradient(45deg, transparent, white);
+  background: linear-gradient(45deg, transparent, rgb(76, 76, 77));
   z-index: -1;
   border-radius: inherit;
 }
