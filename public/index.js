@@ -2,6 +2,10 @@ const cityInput = document.getElementById('city');
 const cityName = document.getElementById('cityName');
 const getCurrentLocation = document.getElementById('location');
 const searchIcon = document.getElementById('searchIcon');
+const info = document.querySelector('.current-info');
+const topMenu = document.querySelector('.topMenu');
+
+if (info.classList.contains('hide')) cityName.innerHTML = "City Not Selected.";
 
 const countries = [ 
     {name: 'Afghanistan', code: 'AF'}, 
@@ -304,8 +308,7 @@ function fetchLocationData(latitude, longitude) {
                 const city = data.address.city || data.address.town || data.address.village || data.address.hamlet;
                 const state = data.address.state || data.address.province;
                 const country = data.address.country;
-                const formattedLocation = `${city}, ${state ? state + ', ' : ''}${country}`;
-                updateCityName(formattedLocation);
+                const formattedLocation = `${city}, ${state ? state + ', ' : ''}${country}`;                
                 fetchWeatherData(formattedLocation);
             } else {
                 updateCityName('Location data not available');
@@ -318,23 +321,37 @@ function fetchLocationData(latitude, longitude) {
 }
 
 function fetchWeatherData(location) {
+
+    if (!location) {
+        cityInput.value = "";
+        return;
+    }
+
     const apiKey = "d4bb3287f300f3eb0ffde66cc48bf67d";
     const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`;
 
     fetch(weatherUrl)
         .then(response => response.json())
         .then(data => {
-            // Process the weather data here
-            const city = data.name;
-            const countryCode = data.sys.country;
-            const country = countries.find(item => item.code === countryCode);
-            const countryName = country ? country.name : countryCode;
-            const formattedLocation = `${city}, ${countryName}`;
-            updateCityName(formattedLocation);
-            console.log(data);
-        })
-            .catch(error => {
+            //Process the weather data here
+            if (data && data.sys && data.sys.country){
+                info.classList.remove('hide');
+                const city = data.name;
+                const countryCode = data.sys.country;
+                const country = countries.find(item => item.code === countryCode);
+                const countryName = country ? country.name : countryCode;
+                const formattedLocation = `${city}, ${countryName}`;
+                updateCityName(formattedLocation);
+                cityName.classList.remove('hide');
+                cityInput.value = "";
+                console.log(data); 
+            } else {
+                alert("City Not Found.");
+                cityInput.value = "";
+            }
+        }).catch(error => {
             console.error('Error fetching weather data:', error);
+            cityInput.value = "";
         });
 }
 
@@ -349,3 +366,5 @@ cityInput.addEventListener('keydown', (event) => {
 searchIcon.addEventListener('click', () => {
     getLocationWeather();
 });
+
+
