@@ -8,6 +8,7 @@
         <meta name="Author" content="Dev Mody">
         <meta name="Description" content="This is a website that actively checks weather from all around the world and provides information to users regarding a certain location's temperature, feels-like temperature, pressure, and more.">
         <link rel="stylesheet" href="styles.css">
+        <link rel="icon" href="img/proweather.png" type="image/x-icon">
     <head>
     <body class="font-body bg-stone-950">
         <div class="top-menu">
@@ -15,12 +16,12 @@
                 <h1 class="p-4 text-slate-50 leading-1">ProWeather</h1>
             </a>  
             <div class="search">
-                <input type="text" name="city" placeholder="Enter City">
+                <input type="text" name="city" placeholder="Enter City" id="city">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                 </svg>                      
             </div>
-            <div class="location" title="Use Current Location">
+            <div class="location" id="location" title="Use Current Location">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10">
                     <path fill-rule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
                 </svg> 
@@ -29,11 +30,62 @@
 
         <main>
             <h1 class="text-5xl text-slate-100 select-none" id="cityName">Toronto, ON</h1>
-            <div class="current-weather">
-                <h1>Hello World</h1>
+            <div class="current-info">
+                <div class="current-weather">
+                    <h1>Hello World</h1>
+                </div>
+                <div class="other-current-info">
+                    <h1>Hello World</h1>
+                </div>
             </div>
         </main>
 
+        <script>
+            const city = document.getElementById('city');
+            const cityName = document.getElementById('cityName');
+            const getCurrentLocation = document.getElementById('location');
+
+            getCurrentLocation.addEventListener('click', () => {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition((position) => {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+                        fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
+                            .then(response => response.json())
+                            .then(data => {
+                              const city = data.address.city || data.address.town || data.address.village || data.address.hamlet;
+                              const state = data.address.state || data.address.province;
+                              const country = data.address.country;
+                              cityName.textContent = `${city}, ${state}, ${country}`;
+                            })
+                            .catch(error => {
+                              console.error('Error fetching city:', error);
+                              cityName.textContent = 'Error fetching city';
+                            });
+                    }, (error) => {
+                        switch(error.code) {
+                            case error.PERMISSION_DENIED:
+                              alert("User denied the request for Geolocation.");
+                              break;
+                            case error.POSITION_UNAVAILABLE:
+                              alert("Location information is unavailable.");
+                              break;
+                            case error.TIMEOUT:
+                              alert("The request to get user location timed out.");
+                              break;
+                            case error.UNKNOWN_ERROR:
+                              alert("An unknown error occurred.");
+                              break;
+                        }
+                    });
+                } else {
+                    cityName.textContent = "Location not supported on this browser."
+                }
+            });
+
+            
+
+        </script>
 
     </body>
 </html>
