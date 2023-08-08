@@ -28,9 +28,9 @@ body {
     @apply transition duration-150 ease-in;
 }
 
-.logo:hover {
+.logo:hover{
     transform: translateY(-5%);
-    @apply shadow-gray-400 shadow-lg;
+    @apply shadow-red-500 shadow-lg;
 }
 
 
