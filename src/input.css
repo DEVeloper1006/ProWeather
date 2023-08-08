@@ -132,7 +132,7 @@ main {
 }
 
 .current-info {
-    @apply flex flex-wrap justify-evenly items-center gap-9;
+    @apply flex flex-wrap justify-evenly items-center gap-5;
     width: 100%;
     height: fit-content;
 }

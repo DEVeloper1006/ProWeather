@@ -807,7 +807,7 @@ main {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
-  gap: 2.25rem;
+  gap: 1.25rem;
   width: 100%;
   height: -moz-fit-content;
   height: fit-content;
