@@ -5,6 +5,7 @@ const getCurrentLocation = document.getElementById('location');
 const searchIcon = document.getElementById('searchIcon');
 const info = document.querySelector('.current-info');
 const topMenu = document.querySelector('.topMenu');
+const errScreen = document.querySelector('.search-something');
 
 function loadCountries() {
     return fetch('countries.json')
@@ -110,7 +111,8 @@ function fetchWeatherData(location) {
                 const countryName = country ? country.name : countryCode;
                 const formattedLocation = `${city}, ${countryName}`;
                 updateCityName(formattedLocation);
-                cityName.classList.remove('hide');
+                //cityName.classList.remove('hide');
+                //errScreen.classList.add('hide');
                 cityInput.value = "";
                 console.log(data); 
             } else {

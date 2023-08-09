@@ -78,7 +78,7 @@ body {
 .location {
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    background-color: rgba(0, 0,0, 0.1);
+    background-color: rgba(255, 255,255, 0.1);
     @apply rounded-full p-2 cursor-pointer transition duration-150 ease-out; 
 }
 
@@ -161,6 +161,19 @@ main {
     transform: translateY(-5%);
 }
 
+.weather-type {
+    @apply absolute bottom-8 left-8 w-56 p-2;
+}
+
+.temp {
+    @apply text-8xl absolute left-48 bottom-14;
+}
+
+.weather-img {
+    @apply absolute left-5 w-2/4 h-2/4;
+}
+
+
 .other-current-info {
     width: 500px;
     height: 350px;
@@ -197,4 +210,25 @@ main {
 
 .hide {
     display: none;
+}
+
+.search-something {
+    width: fit-content;
+    height: fit-content;
+    border: none;
+    outline: none;
+    background: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(255, 255,255, 0.1);
+    @apply relative p-10 rounded-2xl transition duration-150 ease-in cursor-pointer;
+}
+
+.search-something:hover {
+    transform: translateY(-5%);
+    @apply shadow-red-500 shadow-lg;
+}
+
+.search-something h1 {
+    @apply absolute bottom-1/4 left-36;
 }

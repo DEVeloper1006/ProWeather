@@ -540,24 +540,24 @@ video {
   height: 2.5rem;
 }
 
-.h-6{
-  height: 1.5rem;
+.h-3\/4{
+  height: 75%;
 }
 
-.h-full{
-  height: 100%;
+.h-6{
+  height: 1.5rem;
 }
 
 .w-10{
   width: 2.5rem;
 }
 
-.w-6{
-  width: 1.5rem;
+.w-3\/4{
+  width: 75%;
 }
 
-.w-full{
-  width: 100%;
+.w-6{
+  width: 1.5rem;
 }
 
 .select-none{
@@ -579,9 +579,9 @@ video {
   font-family: Poppins;
 }
 
-.text-2xl{
-  font-size: 1.5rem;
-  line-height: 2rem;
+.text-4xl{
+  font-size: 2.25rem;
+  line-height: 2.5rem;
 }
 
 .text-5xl{
@@ -741,7 +741,7 @@ body {
 .location {
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
-  background-color: rgba(0, 0,0, 0.1);
+  background-color: rgba(255, 255,255, 0.1);
   cursor: pointer;
   border-radius: 9999px;
   padding: 0.5rem;
@@ -866,6 +866,29 @@ main {
   transform: translateY(-5%);
 }
 
+.weather-type{
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  width: 14rem;
+  padding: 0.5rem;
+}
+
+.temp{
+  position: absolute;
+  left: 12rem;
+  bottom: 3.5rem;
+  font-size: 6rem;
+  line-height: 1;
+}
+
+.weather-img{
+  position: absolute;
+  left: 1.25rem;
+  height: 50%;
+  width: 50%;
+}
+
 .other-current-info {
   width: 500px;
   height: 350px;
@@ -931,4 +954,42 @@ main {
 
 .hide {
   display: none;
+}
+
+.search-something {
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border: none;
+  outline: none;
+  background: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(255, 255,255, 0.1);
+  position: relative;
+  cursor: pointer;
+  border-radius: 1rem;
+  padding: 2.5rem;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
+.search-something:hover {
+  transform: translateY(-5%);
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  --tw-shadow-color: #ef4444;
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.search-something h1{
+  position: absolute;
+  bottom: 25%;
+  left: 9rem;
 }
