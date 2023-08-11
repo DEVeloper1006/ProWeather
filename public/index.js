@@ -163,22 +163,22 @@ function updateWeatherIcon(weatherObject, date) {
     let description = weatherObject.description;
     switch (description) {
         case "scattered clouds":
-            weatherIcon.src = "https://openweathermap.org/img/wn/03d@2x.png";
+            weatherIcon.src = "openweathermap/03d.svg";
             break;
         case "broken clouds":
-            weatherIcon.src = "https://openweathermap.org/img/wn/04d@2x.png";
+            weatherIcon.src = "openweathermap/04d.svg";
             break;
         case "shower rain":
-            weatherIcon.src = "https://openweathermap.org/img/wn/09d@2x.png";
+            weatherIcon.src = "openweathermap/09d.svg";
             break;
         case "thunderstorm":
-            weatherIcon.src = "https://openweathermap.org/img/wn/11d@2x.png";
+            weatherIcon.src = "openweathermap/11d.svg";
             break;
         case "snow":
-            weatherIcon.src = "https://openweathermap.org/img/wn/13d@2x.png";
+            weatherIcon.src = "openweathermap/13d.svg";
             break;
         case "mist":
-            weatherIcon.src = "https://openweathermap.org/img/wn/50d@2x.png";
+            weatherIcon.src = "openweathermap/50d.svg";
             break;
         case "clear sky":
     }
