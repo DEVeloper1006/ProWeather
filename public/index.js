@@ -6,6 +6,23 @@ const searchIcon = document.getElementById('searchIcon');
 const info = document.querySelector('.current-info');
 const topMenu = document.querySelector('.topMenu');
 const errScreen = document.querySelector('.search-something');
+const temp = document.querySelector('.temp');
+const unit = document.querySelector('.unit');
+const weatherIcon = document.querySelector('.weather-img');
+const toggleUnits = document.getElementById('unit-switch');
+let fahrenheit = false;
+
+function convertTemperature () {
+    if (!fahrenheit) {
+        let celsiusTemp = temp.value;
+        temp.value = Math.round((celsiusTemp * 9/5)+32);
+        unit.value = "°F"
+    } else {
+        let fahrenheitTemp = temp.value;
+        temp.value = Math.round(((fahrenheitTemp - 32)*5)/9);
+        unit.value = "°C"
+    }
+}
 
 function loadCountries() {
     return fetch('countries.json')
@@ -111,9 +128,10 @@ function fetchWeatherData(location) {
                 const countryName = country ? country.name : countryCode;
                 const formattedLocation = `${city}, ${countryName}`;
                 updateCityName(formattedLocation);
-                //cityName.classList.remove('hide');
-                //errScreen.classList.add('hide');
+                cityName.classList.remove('hide');
+                errScreen.classList.add('hide');
                 cityInput.value = "";
+                updateWeatherInfo(data);
                 console.log(data); 
             } else {
                 alert("City Not Found.");
@@ -128,6 +146,31 @@ function fetchWeatherData(location) {
 function updateCityName(city) {
     cityName.textContent = city;
 }
+
+function updateWeatherInfo (data) {
+    updateTemperature(data.main);
+    updateWeatherIcon(data.weather[0]);
+}
+
+function updateTemperature (tempObject) {
+    let kelvinTemp = tempObject.temp;
+    temp.innerHTML = kelvinToCelsius(kelvinTemp);
+}
+
+function updateWeatherIcon(weatherObject) {
+    let description = weatherObject.description;
+    switch (description) {
+        case "clear sky": 
+            weatherIcon.src = "svg/day.svg";
+            break;
+    }
+}
+
+function kelvinToCelsius (kelvin) {
+    return (Math.round(kelvin - 273.15));
+}
+
+toggleUnits.addEventListener('click', convertTemperature());
 
 getCurrentLocation.addEventListener('click', getCurrentLocationWeather);
 cityInput.addEventListener('keydown', (event) => {
