@@ -149,7 +149,9 @@ function updateCityName(city) {
 
 function updateWeatherInfo (data) {
     updateTemperature(data.main);
-    updateWeatherIcon(data.weather[0]);
+    const newDate = new Date();
+    const hours = newDate.getHours();
+    updateWeatherIcon(data.weather[0], hours);
 }
 
 function updateTemperature (tempObject) {
@@ -157,13 +159,42 @@ function updateTemperature (tempObject) {
     temp.innerHTML = kelvinToCelsius(kelvinTemp);
 }
 
-function updateWeatherIcon(weatherObject) {
+function updateWeatherIcon(weatherObject, date) {
     let description = weatherObject.description;
     switch (description) {
-        case "clear sky": 
-            weatherIcon.src = "svg/day.svg";
+        case "scattered clouds":
+            weatherIcon.src = "https://openweathermap.org/img/wn/03d@2x.png";
             break;
+        case "broken clouds":
+            weatherIcon.src = "https://openweathermap.org/img/wn/04d@2x.png";
+            break;
+        case "shower rain":
+            weatherIcon.src = "https://openweathermap.org/img/wn/09d@2x.png";
+            break;
+        case "thunderstorm":
+            weatherIcon.src = "https://openweathermap.org/img/wn/11d@2x.png";
+            break;
+        case "snow":
+            weatherIcon.src = "https://openweathermap.org/img/wn/13d@2x.png";
+            break;
+        case "mist":
+            weatherIcon.src = "https://openweathermap.org/img/wn/50d@2x.png";
+            break;
+        case "clear sky":
     }
+}
+
+function dayOrNight (inputDate) {
+    const sunriseTime = new Date();
+    const sunsetTime = new Date();
+
+    const civilTwilightStart = new Date(sunriseTime);
+    civilTwilightStart.setMinutes(sunriseTime.getMinutes() - 30);
+
+    const civilTwilightEnd = new Date(sunsetTime);
+    civilTwilightEnd.setMinutes(sunsetTime.getMinutes() + 30);
+
+    return inputDate >= civilTwilightStart && inputDate <= civilTwilightEnd;
 }
 
 function kelvinToCelsius (kelvin) {
