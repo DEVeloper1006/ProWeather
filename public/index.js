@@ -10,19 +10,8 @@ const temp = document.querySelector('.temp');
 const unit = document.querySelector('.unit');
 const weatherIcon = document.querySelector('.weather-img');
 const toggleUnits = document.getElementById('unit-switch');
-let fahrenheit = false;
-
-function convertTemperature () {
-    if (!fahrenheit) {
-        let celsiusTemp = temp.value;
-        temp.value = Math.round((celsiusTemp * 9/5)+32);
-        unit.value = "°F"
-    } else {
-        let fahrenheitTemp = temp.value;
-        temp.value = Math.round(((fahrenheitTemp - 32)*5)/9);
-        unit.value = "°C"
-    }
-}
+const weatherDescr = document.querySelector('.weather-type');
+const feelsLikeTemp = document.getElementById("feels-like");
 
 function loadCountries() {
     return fetch('countries.json')
@@ -149,59 +138,100 @@ function updateCityName(city) {
 
 function updateWeatherInfo (data) {
     updateTemperature(data.main);
-    const newDate = new Date();
-    const hours = newDate.getHours();
-    updateWeatherIcon(data.weather[0], hours);
+    const system = data.sys;
+    const sunriseTime = system.sunrise;
+    const sunsetTime = system.sunset;
+    updateWeatherIcon(data.weather[0], sunriseTime, sunsetTime);
 }
 
 function updateTemperature (tempObject) {
     let kelvinTemp = tempObject.temp;
+    let kelvinFeelsLikeTemp = tempObject.feels_like;
     temp.innerHTML = kelvinToCelsius(kelvinTemp);
+    feelsLikeTemp.innerHTML = "Feels Like " + kelvinToCelsius(kelvinFeelsLikeTemp) + "°C";
 }
 
-function updateWeatherIcon(weatherObject, date) {
+function updateDescription (description) {
+    weatherDescr.innerText = description;
+}
+
+function updateWeatherIcon(weatherObject, sunrise, sunset) {
     let description = weatherObject.description;
+    const isDay = dayOrNight(sunrise, sunset);
     switch (description) {
         case "scattered clouds":
             weatherIcon.src = "openweathermap/03d.svg";
+            updateDescription("Scattered Clouds");
             break;
         case "broken clouds":
-            weatherIcon.src = "openweathermap/04d.svg";
+            if (isDay) weatherIcon.src = "openweathermap/02d.svg";
+            else weatherIcon.src = "openweathermap/02n.svg";
+            updateDescription("Broken Clouds");
             break;
         case "shower rain":
             weatherIcon.src = "openweathermap/09d.svg";
+            updateDescription("Shower Rain");
             break;
         case "thunderstorm":
             weatherIcon.src = "openweathermap/11d.svg";
+            updateDescription("Thunderstorm");
             break;
         case "snow":
             weatherIcon.src = "openweathermap/13d.svg";
+            updateDescription("Snow");
             break;
         case "mist":
             weatherIcon.src = "openweathermap/50d.svg";
+            updateDescription("Mist");
+            break;
+        case "fog":
+            weatherIcon.src = "openweathermap/50d.svg";
+            updateDescription("Fog");
+            break;
+        case "haze":
+            weatherIcon.src = "openweathermap/50d.svg";
+            updateDescription("Haze");
             break;
         case "clear sky":
+            if (isDay) weatherIcon.src = "openweathermap/01d.svg";
+            else weatherIcon.src = "openweathermap/01n.svg";
+            updateDescription("Clear Sky");
+            break;
+        case "few clouds":
+            if (isDay) weatherIcon.src = "openweathermap/02d.svg";
+            else weatherIcon.src = "openweathermap/02n.svg";
+            updateDescription("Few Clouds");
+            break;
+        case "rain":
+            if (isDay) weatherIcon = "openweathermap/10d.svg";
+            else weatherIcon = "openweathermap/10n.svg" ;
+            updateDescription("Rainy Day");
+            break;
     }
 }
 
-function dayOrNight (inputDate) {
-    const sunriseTime = new Date();
-    const sunsetTime = new Date();
-
-    const civilTwilightStart = new Date(sunriseTime);
-    civilTwilightStart.setMinutes(sunriseTime.getMinutes() - 30);
-
-    const civilTwilightEnd = new Date(sunsetTime);
-    civilTwilightEnd.setMinutes(sunsetTime.getMinutes() + 30);
-
-    return inputDate >= civilTwilightStart && inputDate <= civilTwilightEnd;
+function dayOrNight (sunrise, sunset) {
+    const now = new Date();
+    const sunriseTime = new Date (sunrise * 1000);
+    const sunsetTime = new Date(sunset * 1000);
+    return (now >= sunriseTime && now <= sunsetTime);
 }
 
 function kelvinToCelsius (kelvin) {
     return (Math.round(kelvin - 273.15));
 }
 
-toggleUnits.addEventListener('click', convertTemperature());
+toggleUnits.addEventListener('change', () => {
+    if (unit.value === "°C") {
+        let celsiusTemp = temp.value;
+        temp.value = Math.round((celsiusTemp * 9/5) + 32);
+        unit.value = "°F";
+    } else {
+        let fahrenheitTemp = temp.value;
+        temp.value = Math.round(((fahrenheitTemp - 32) * 5) / 9);
+        unit.value = "°C";
+    }
+});
 
 getCurrentLocation.addEventListener('click', getCurrentLocationWeather);
 cityInput.addEventListener('keydown', (event) => {

@@ -132,7 +132,7 @@ main {
 }
 
 .current-weather:hover {
-    @apply shadow-gray-400 shadow-lg;
+    @apply shadow-red-500 shadow-lg;
     transform: translateY(-5%);
 }
 
@@ -145,11 +145,15 @@ main {
 }
 
 .weather-img {
-    @apply absolute left-5 w-3/4 h-3/4;
+    @apply absolute left-7 top-20 w-1/2 h-1/2;
 }
 
 .unit {
     @apply absolute top-14 right-5 text-2xl;
+}
+
+.feels-like {
+    @apply absolute text-red-500 right-11 bottom-40;
 }
 
 .toggle-switch {
