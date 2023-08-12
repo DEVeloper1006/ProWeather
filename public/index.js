@@ -9,7 +9,7 @@ const errScreen = document.querySelector('.search-something');
 const temp = document.querySelector('.temp');
 const unit = document.querySelector('.unit');
 const weatherIcon = document.querySelector('.weather-img');
-const toggleUnits = document.getElementById('unit-switch');
+const toggleUnit = document.getElementById('unit-switch');
 const weatherDescr = document.querySelector('.weather-type');
 const feelsLikeTemp = document.getElementById("feels-like");
 
@@ -221,15 +221,28 @@ function kelvinToCelsius (kelvin) {
     return (Math.round(kelvin - 273.15));
 }
 
-toggleUnits.addEventListener('change', () => {
-    if (unit.value === "°C") {
-        let celsiusTemp = temp.value;
-        temp.value = Math.round((celsiusTemp * 9/5) + 32);
-        unit.value = "°F";
+function celsiusToFahrenheit (celsius) {
+    return Math.round((celsius * 9/5) + 32); 
+}
+
+function fahrenheitToCelsius (fahrenheit) {
+    return Math.round(((fahrenheit - 32) * 5) / 9);
+}
+
+toggleUnit.addEventListener('change', () => {
+    const parts = feelsLikeTemp.textContent.split(' ');
+    if (unit.textContent === "°C") {
+        let celsiusTemp = temp.innerHTML;
+        let celsiusFeelsLike = Number(parts[2].replace("°C", ""));
+        feelsLikeTemp.textContent = "Feels Like " + celsiusToFahrenheit(celsiusFeelsLike) + "°F";
+        temp.innerHTML = celsiusToFahrenheit(celsiusTemp);
+        unit.textContent = "°F";
     } else {
-        let fahrenheitTemp = temp.value;
-        temp.value = Math.round(((fahrenheitTemp - 32) * 5) / 9);
-        unit.value = "°C";
+        let fahrenheitTemp = temp.innerHTML;
+        let fahrenheitFeelsLike = Number(parts[2].replace("°F", ""));
+        feelsLikeTemp.textContent = "Feels Like " + fahrenheitToCelsius(fahrenheitFeelsLike) + "°C";
+        temp.innerHTML = fahrenheitToCelsius(fahrenheitTemp);
+        unit.textContent = "°C";
     }
 });
 
