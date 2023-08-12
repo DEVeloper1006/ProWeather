@@ -63,7 +63,7 @@ body {
 
 .search input:focus
 ,.search input:not(:placeholder-shown) {
-    @apply shadow-gray-400 shadow-lg; 
+    @apply shadow-gray-400 shadow-lg text-red-500; 
 }
 
 .search svg {
