@@ -1,4 +1,3 @@
-
 const cityInput = document.getElementById('city');
 const cityName = document.getElementById('cityName');
 const getCurrentLocation = document.getElementById('location');
@@ -118,6 +117,7 @@ function fetchWeatherData(location) {
                 const formattedLocation = `${city}, ${countryName}`;
                 updateCityName(formattedLocation);
                 cityName.classList.remove('hide');
+                toggleUnit.checked = false;
                 errScreen.classList.add('hide');
                 cityInput.value = "";
                 updateWeatherInfo(data);
@@ -229,7 +229,7 @@ function fahrenheitToCelsius (fahrenheit) {
     return Math.round(((fahrenheit - 32) * 5) / 9);
 }
 
-toggleUnit.addEventListener('change', () => {
+function changeUnits () {
     const parts = feelsLikeTemp.textContent.split(' ');
     if (unit.textContent === "°C") {
         let celsiusTemp = temp.innerHTML;
@@ -244,12 +244,15 @@ toggleUnit.addEventListener('change', () => {
         temp.innerHTML = fahrenheitToCelsius(fahrenheitTemp);
         unit.textContent = "°C";
     }
-});
+}
+
+toggleUnit.addEventListener('change', changeUnits);
 
 getCurrentLocation.addEventListener('click', getCurrentLocationWeather);
 cityInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') getLocationWeather();
 })
+
 searchIcon.addEventListener('click', () => {
     getLocationWeather();
 });
