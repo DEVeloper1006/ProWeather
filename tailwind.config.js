@@ -7,6 +7,10 @@ module.exports = {
         body: 'Poppins'
       }
     },
+    screens: {
+      'md-lg': "915px",
+      'xs': '400px'
+    }
   },
   plugins: [],
   darkMode: 'media'

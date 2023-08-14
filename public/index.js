@@ -188,6 +188,10 @@ function updateWeatherIcon(weatherObject, sunrise, sunset) {
             weatherIcon.src = "openweathermap/50d.svg";
             updateDescription("Fog");
             break;
+        case "smoke":
+            weatherIcon.src = "openweathermap/50d.svg";
+            updateDescription("Smoke");
+            break;
         case "haze":
             weatherIcon.src = "openweathermap/50d.svg";
             updateDescription("Haze");
