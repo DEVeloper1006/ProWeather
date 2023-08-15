@@ -567,11 +567,6 @@ video {
   font-family: Poppins;
 }
 
-.text-4xl{
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-}
-
 .text-5xl{
   font-size: 3rem;
   line-height: 1;
@@ -615,7 +610,7 @@ body {
   padding: 2.5rem;
 }
 
-@media screen and (max-width: 400px) {
+@media (max-width: 600px) {
   .top-menu{
     justify-content: space-evenly;
   }
@@ -823,23 +818,21 @@ main {
 }
 
 .current-info {
-  width: 97%;
+  width: 100%;
 }
 
 .current-weather{
   grid-column: span 3 / span 3;
-  width: 100%;
-  height: 350px;
+  height: -moz-fit-content;
+  height: fit-content;
   border: none;
   outline: none;
   background: none;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   background-color: rgba(255, 255,255, 0.1);
-  position: relative;
   cursor: pointer;
   border-radius: 1rem;
-  padding: 1.25rem;
   --tw-text-opacity: 1;
   color: rgb(248 250 252 / var(--tw-text-opacity));
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
@@ -848,6 +841,11 @@ main {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.25rem;
 }
 
 .current-weather:hover{
@@ -859,50 +857,80 @@ main {
   transform: translateY(-5%);
 }
 
-.weather-type{
-  position: absolute;
-  bottom: 2rem;
-  left: 2rem;
-  width: 14rem;
-  padding: 0.5rem;
+.info-wrap{
+  display: flex;
+  width: -moz-fit-content;
+  width: fit-content;
+  justify-content: space-between;
 }
 
-.temp{
-  position: absolute;
-  right: 3.5rem;
-  top: 5rem;
-  font-size: 6rem;
-  line-height: 1;
+.weather{
+  display: flex;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 50%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.weather-type{
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  transform: translateY(-3px);
 }
 
 .weather-img{
-  position: absolute;
-  left: 1.75rem;
-  top: 5rem;
-  height: 50%;
-  width: 50%;
+  height: 100%;
+  width: 75%;
 }
 
-.unit{
-  position: absolute;
-  top: 5rem;
-  right: 1.75rem;
-  font-size: 1.5rem;
-  line-height: 2rem;
+.temperature{
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.temp{
+  font-size: 3.75rem;
+  line-height: 1;
+  font-weight: 700;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
+@media (min-width: 768px){
+  .temp{
+    font-size: 4.5rem;
+    line-height: 1;
+  }
+}
+
+.temp {
+  transform: translateY(18px);
 }
 
 .feels-like{
-  position: absolute;
-  right: 3rem;
-  bottom: 9rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
+  transform: translateY(28px);
 }
 
 .toggle-switch{
-  position: absolute;
-  bottom: 2rem;
-  right: 2.5rem;
+  margin-top: 2rem;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .toggle {

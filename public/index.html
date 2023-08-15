@@ -36,18 +36,25 @@
         </div>
 
         <main>
-            <h1 class="text-5xl text-slate-100 select-none hide" id="cityName">Toronto, Ontario, Canada</h1>
+            <h1 class="text-5xl text-slate-100 select-none" id="cityName">Please Search a City</h1>
             <div class="current-info hide">
                 <div class="current-weather">
-                    <h2>Current Weather</h2>
-                    <img src="" alt="Partly Cloudy" title="Partly Cloudy" class="weather-img">
-                    <h2 class="weather-type">Partly Cloudy</h2>
-                    <h1 class="temp z-10"></h1>
-                    <h4 class="unit">°C</h4>
-                    <div class="toggle-switch">
-                        <input type="checkbox" id="unit-switch" class="toggle" name="toggle" title="Switch Units">
+                    <h2 class="current-title">Current Weather</h2>
+                    <div class="info-wrap">
+                        <div class="weather">
+                            <img src="" alt="Partly Cloudy" title="Partly Cloudy" class="weather-img">
+                            <h2 class="weather-type"></h2>
+                        </div>
+                        <div class="temperature">
+                            <h1 class="temp z-10"></h1>
+                            <h5 class="feels-like" id="feels-like">Feels Like</h5>
+                        </div> 
                     </div>
-                    <h5 class="feels-like" id="feels-like">Feels Like</h5>
+                    <div class="toggle-switch">
+                        <h2>Celsius</h2>
+                        <input type="checkbox" id="unit-switch" class="toggle" name="toggle" title="Switch Units">
+                        <h2>Fahrenheit</h2>
+                    </div> 
                 </div>
                 <div class="other-details">
                     <h1>Hello World</h1>
@@ -55,7 +62,6 @@
             </div>
             <div class="search-something">
                 <img src="openweathermap/undraw_weather_re_qsmd.svg" alt="Please Search Something" title="Please Search a City">
-                <h1 class="text-4xl text-slate-50 select-none">Please Search a City</h1>
             </div>
         </main>
 

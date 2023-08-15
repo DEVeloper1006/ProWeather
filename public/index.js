@@ -6,7 +6,6 @@ const info = document.querySelector('.current-info');
 const topMenu = document.querySelector('.topMenu');
 const errScreen = document.querySelector('.search-something');
 const temp = document.querySelector('.temp');
-const unit = document.querySelector('.unit');
 const weatherIcon = document.querySelector('.weather-img');
 const toggleUnit = document.getElementById('unit-switch');
 const weatherDescr = document.querySelector('.weather-type');
@@ -116,8 +115,6 @@ function fetchWeatherData(location) {
                 const countryName = country ? country.name : countryCode;
                 const formattedLocation = `${city}, ${countryName}`;
                 updateCityName(formattedLocation);
-                cityName.classList.remove('hide');
-                toggleUnit.checked = false;
                 errScreen.classList.add('hide');
                 cityInput.value = "";
                 updateWeatherInfo(data);
@@ -147,7 +144,7 @@ function updateWeatherInfo (data) {
 function updateTemperature (tempObject) {
     let kelvinTemp = tempObject.temp;
     let kelvinFeelsLikeTemp = tempObject.feels_like;
-    temp.innerHTML = kelvinToCelsius(kelvinTemp);
+    temp.innerHTML = kelvinToCelsius(kelvinTemp) + "°C";
     feelsLikeTemp.innerHTML = "Feels Like " + kelvinToCelsius(kelvinFeelsLikeTemp) + "°C";
 }
 
@@ -168,14 +165,19 @@ function updateWeatherIcon(weatherObject, sunrise, sunset) {
             else weatherIcon.src = "openweathermap/02n.svg";
             updateDescription("Broken Clouds");
             break;
+        case "overcast clouds":
+            if (isDay) weatherIcon.src = "openweathermap/02d.svg";
+            else weatherIcon.src = "openweathermap/02n.svg";
+            updateDescription("Overcast Clouds");
+            break;
         case "moderate rain":
             weatherIcon.src = "openweathermap/09d.svg";
             updateDescription("Moderate Rain");
             break;
         case "light rain":
-        weatherIcon.src = "openweathermap/09d.svg";
-        updateDescription("Light Rain");
-        break;
+            weatherIcon.src = "openweathermap/09d.svg";
+            updateDescription("Light Rain");
+            break;
         case "thunderstorm":
             weatherIcon.src = "openweathermap/11d.svg";
             updateDescription("Thunderstorm");
@@ -237,25 +239,6 @@ function fahrenheitToCelsius (fahrenheit) {
     return Math.round(((fahrenheit - 32) * 5) / 9);
 }
 
-function changeUnits () {
-    const parts = feelsLikeTemp.textContent.split(' ');
-    if (unit.textContent === "°C") {
-        let celsiusTemp = temp.innerHTML;
-        let celsiusFeelsLike = Number(parts[2].replace("°C", ""));
-        feelsLikeTemp.textContent = "Feels Like " + celsiusToFahrenheit(celsiusFeelsLike) + "°F";
-        temp.innerHTML = celsiusToFahrenheit(celsiusTemp);
-        unit.textContent = "°F";
-    } else {
-        let fahrenheitTemp = temp.innerHTML;
-        let fahrenheitFeelsLike = Number(parts[2].replace("°F", ""));
-        feelsLikeTemp.textContent = "Feels Like " + fahrenheitToCelsius(fahrenheitFeelsLike) + "°C";
-        temp.innerHTML = fahrenheitToCelsius(fahrenheitTemp);
-        unit.textContent = "°C";
-    }
-}
-
-toggleUnit.addEventListener('change', changeUnits);
-
 getCurrentLocation.addEventListener('click', getCurrentLocationWeather);
 cityInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') getLocationWeather();
@@ -265,4 +248,27 @@ searchIcon.addEventListener('click', () => {
     getLocationWeather();
 });
 
+function changeUnits () {
+    const oldTemp = temp.innerHTML;
+    const parts = feelsLikeTemp.textContent.split(' ');
+    if (oldTemp.endsWith("°C")) {
+        let celsiusFeelsLike = Number(parts[2].replace("°C", ""));
+        feelsLikeTemp.textContent = "Feels Like " + celsiusToFahrenheit(celsiusFeelsLike) + "°F";
+        temp.innerHTML = celsiusToFahrenheit(spliceTemperature(oldTemp)) + "°F";
+    } else {
+        let fahrenheitFeelsLike = Number(parts[2].replace("°F", ""));
+        feelsLikeTemp.textContent = "Feels Like " + fahrenheitToCelsius(fahrenheitFeelsLike) + "°C";
+        temp.innerHTML = fahrenheitToCelsius(spliceTemperature(oldTemp)) + "°C";
+    }
+}
+
+function spliceTemperature (temperature){
+    let numericPart = '';
+    for (let i = 0; i < temperature.length; i++) {
+        if (!isNaN(temperature[i])) numericPart += temperature[i];
+    }
+    return numericPart;
+}
+
+toggleUnit.addEventListener('change', changeUnits);
 
