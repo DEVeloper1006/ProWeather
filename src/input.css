@@ -22,12 +22,20 @@ body {
 }
 
 .top-menu {
-    @apply grid grid-cols-15 m-5 mt-10 p-5;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    @apply p-5;
+    gap: 10px;
+    border: 2px solid red;
 }
 
 .logo {
-    @apply text-3xl col-span-3 select-none text-center rounded-3xl cursor-pointer;
+    @apply text-3xl select-none text-center rounded-3xl cursor-pointer;
     backdrop-filter: blur(10px);
+    width: fit-content;
+    height: fit-content;
     -webkit-backdrop-filter: blur(10px);
     background-color: rgba(255, 255,255, 0.1);
     @apply transition duration-150 ease-in;
@@ -36,10 +44,6 @@ body {
 .logo:hover{
     transform: translateY(-5%);
     @apply shadow-red-500 shadow-lg;
-}
-
-.search-menu {
-    @apply flex justify-evenly items-center col-span-5;
 }
 
 .search {
@@ -78,15 +82,40 @@ body {
 
 .location {
     backdrop-filter: blur(5px);
+    width: 75px;
+    height: 75px;
     -webkit-backdrop-filter: blur(5px);
     background-color: rgba(255, 255,255, 0.1);
-    @apply p-2 rounded-full cursor-pointer transition duration-150 ease-out; 
+    @apply p-2 rounded-full cursor-pointer transition duration-150 ease-out relative; 
+}
+
+.location > * {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .location:hover {
     transform: translateY(-5%);
     @apply shadow-gray-400 shadow-lg;
 }
+
+/*
+@media screen and (max-width: 700px) {
+    .logo {
+        font-size: 15px;
+    }
+
+    .search {
+        font-size: smaller;
+    }
+
+    .location {
+        font-size: smaller;
+    }
+}
+*/
 
 .skeleton {
     opacity: .7;

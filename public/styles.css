@@ -605,17 +605,17 @@ body {
   overflow-x: hidden;
 }
 
-.top-menu{
-  margin: 1.25rem;
-  margin-top: 2.5rem;
+.top-menu {
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(10, minmax(0, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
   padding: 1.25rem;
+  gap: 10px;
+  border: 2px solid red;
 }
 
 .logo{
-  grid-column: span 3 / span 3;
   cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -625,6 +625,10 @@ body {
   font-size: 1.875rem;
   line-height: 2.25rem;
   backdrop-filter: blur(10px);
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   -webkit-backdrop-filter: blur(10px);
   background-color: rgba(255, 255,255, 0.1);
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
@@ -642,13 +646,6 @@ body {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   --tw-shadow-color: #ef4444;
   --tw-shadow: var(--tw-shadow-colored);
-}
-
-.search-menu{
-  grid-column: span 5 / span 5;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
 }
 
 .search{
@@ -734,8 +731,11 @@ body {
 
 .location {
   backdrop-filter: blur(5px);
+  width: 75px;
+  height: 75px;
   -webkit-backdrop-filter: blur(5px);
   background-color: rgba(255, 255,255, 0.1);
+  position: relative;
   cursor: pointer;
   border-radius: 9999px;
   padding: 0.5rem;
@@ -747,6 +747,13 @@ body {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
+.location > * {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .location:hover {
   transform: translateY(-5%);
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -755,6 +762,22 @@ body {
   --tw-shadow-color: #9ca3af;
   --tw-shadow: var(--tw-shadow-colored);
 }
+
+/*
+@media screen and (max-width: 700px) {
+    .logo {
+        font-size: 15px;
+    }
+
+    .search {
+        font-size: smaller;
+    }
+
+    .location {
+        font-size: smaller;
+    }
+}
+*/
 
 .skeleton {
   opacity: .7;

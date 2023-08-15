@@ -168,10 +168,14 @@ function updateWeatherIcon(weatherObject, sunrise, sunset) {
             else weatherIcon.src = "openweathermap/02n.svg";
             updateDescription("Broken Clouds");
             break;
-        case "shower rain":
+        case "moderate rain":
             weatherIcon.src = "openweathermap/09d.svg";
-            updateDescription("Shower Rain");
+            updateDescription("Moderate Rain");
             break;
+        case "light rain":
+        weatherIcon.src = "openweathermap/09d.svg";
+        updateDescription("Light Rain");
+        break;
         case "thunderstorm":
             weatherIcon.src = "openweathermap/11d.svg";
             updateDescription("Thunderstorm");
