@@ -23,12 +23,13 @@ body {
 
 .top-menu {
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    align-items: center;
-    @apply p-5;
-    gap: 10px;
-    border: 2px solid red;
+    @apply flex justify-between items-center flex-wrap gap-10 p-10;
+}
+
+@media screen and (max-width: 400px) {
+    .top-menu {
+        @apply justify-evenly;
+    }
 }
 
 .logo {
@@ -101,22 +102,6 @@ body {
     @apply shadow-gray-400 shadow-lg;
 }
 
-/*
-@media screen and (max-width: 700px) {
-    .logo {
-        font-size: 15px;
-    }
-
-    .search {
-        font-size: smaller;
-    }
-
-    .location {
-        font-size: smaller;
-    }
-}
-*/
-
 .skeleton {
     opacity: .7;
     animation: skeleton-loading 1s linear infinite alternate;
@@ -150,7 +135,7 @@ main {
 }
 
 .current-info {
-    @apply grid grid-cols-1 md-lg:grid-cols-6 gap-5;
+    @apply grid grid-cols-3 md-lg:grid-cols-6 gap-5;
     width: 97%;
 }
 

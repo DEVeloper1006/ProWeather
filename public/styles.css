@@ -607,12 +607,18 @@ body {
 
 .top-menu {
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  padding: 1.25rem;
-  gap: 10px;
-  border: 2px solid red;
+  justify-content: space-between;
+  gap: 2.5rem;
+  padding: 2.5rem;
+}
+
+@media screen and (max-width: 400px) {
+  .top-menu{
+    justify-content: space-evenly;
+  }
 }
 
 .logo{
@@ -763,22 +769,6 @@ body {
   --tw-shadow: var(--tw-shadow-colored);
 }
 
-/*
-@media screen and (max-width: 700px) {
-    .logo {
-        font-size: 15px;
-    }
-
-    .search {
-        font-size: smaller;
-    }
-
-    .location {
-        font-size: smaller;
-    }
-}
-*/
-
 .skeleton {
   opacity: .7;
   animation: skeleton-loading 1s linear infinite alternate;
@@ -822,7 +812,7 @@ main {
 
 .current-info{
   display: grid;
-  grid-template-columns: repeat(1, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.25rem;
 }
 
