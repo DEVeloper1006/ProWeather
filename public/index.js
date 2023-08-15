@@ -115,7 +115,7 @@ function fetchWeatherData(location) {
                 const countryName = country ? country.name : countryCode;
                 const formattedLocation = `${city}, ${countryName}`;
                 updateCityName(formattedLocation);
-                errScreen.classList.add('hide');
+                //errScreen.classList.add('hide');
                 cityInput.value = "";
                 updateWeatherInfo(data);
                 console.log(data); 
@@ -175,6 +175,10 @@ function updateWeatherIcon(weatherObject, sunrise, sunset) {
             updateDescription("Moderate Rain");
             break;
         case "light rain":
+            weatherIcon.src = "openweathermap/09d.svg";
+            updateDescription("Light Rain");
+            break;
+        case "light intensity shower rain":
             weatherIcon.src = "openweathermap/09d.svg";
             updateDescription("Light Rain");
             break;

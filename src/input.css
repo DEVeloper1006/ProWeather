@@ -140,7 +140,7 @@ main {
 }
 
 .current-weather {
-    @apply col-span-3;
+    @apply col-span-3 lg:col-span-2;
     height: fit-content;
     border: none;
     outline: none;
@@ -179,7 +179,7 @@ main {
 } 
 
 .temp {
-    @apply text-6xl md:text-7xl font-bold transition duration-150 ease-in;
+    @apply text-7xl md-lg:text-4xl md-lg-sm:text-7xl font-bold transition duration-150 ease-in;
     transform: translateY(18px);
 }
 
@@ -226,8 +226,9 @@ input:checked::after {
 }
 
 .other-details {
-    @apply col-span-3;
-    height: 350px;
+    @apply col-span-3 md-lg:col-span-4 select-none;
+    @apply flex flex-col justify-evenly items-center gap-4;
+    height: fit-content;
     border: none;
     outline: none;
     background: none;
@@ -241,6 +242,31 @@ input:checked::after {
     transform: translateY(-5%);
     @apply shadow-gray-400 shadow-lg;
 }
+
+.details-grid {
+    @apply flex flex-wrap justify-evenly items-center w-full;
+    border: 2px solid red;
+}
+
+.details-grid > * {
+    flex: 1 1 20%;
+}
+
+.ss-wrap {
+    @apply flex flex-col justify-evenly items-center p-2 bg-stone-900 rounded-3xl;
+    width: 150px;
+    height: 250px;
+}
+
+.rise-set {
+    @apply flex justify-between items-center w-full p-5 select-none transition duration-150 ease-in-out rounded-2xl;
+}
+
+.rise-set:hover {
+    @apply bg-red-700 shadow-slate-50 shadow-sm;
+}
+
+
 
 .hide {
     display: none;

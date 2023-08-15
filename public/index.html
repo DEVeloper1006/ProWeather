@@ -37,17 +37,17 @@
 
         <main>
             <h1 class="text-5xl text-slate-100 select-none" id="cityName">Please Search a City</h1>
-            <div class="current-info hide">
-                <div class="current-weather">
+            <div class="current-info">
+                <div class="current-weather select-none">
                     <h2 class="current-title">Current Weather</h2>
                     <div class="info-wrap">
                         <div class="weather">
-                            <img src="" alt="Partly Cloudy" title="Partly Cloudy" class="weather-img">
+                            <img src="openweathermap/01n.svg" alt="Partly Cloudy" title="Partly Cloudy" class="weather-img">
                             <h2 class="weather-type"></h2>
                         </div>
                         <div class="temperature">
-                            <h1 class="temp z-10"></h1>
-                            <h5 class="feels-like" id="feels-like">Feels Like</h5>
+                            <h1 class="temp z-10">10°C</h1>
+                            <h5 class="feels-like" id="feels-like">Feels Like 10°C</h5>
                         </div> 
                     </div>
                     <div class="toggle-switch">
@@ -57,10 +57,25 @@
                     </div> 
                 </div>
                 <div class="other-details">
-                    <h1>Hello World</h1>
+                    <h1>More Details</h1>
+                    <div class="details-grid">
+                        <div class="ss-wrap">
+                            <div class="rise-set">
+                                <h1>Sunrise</h1>
+                                <h2>8:00 PM</h2>
+                            </div>
+                            <div class="rise-set">
+                                <h1>Sunset</h1>
+                                <h2>8:00 AM</h2>
+                            </div>
+                        </div>
+                        <div class="wind-info">
+
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="search-something">
+            <div class="search-something hide">
                 <img src="openweathermap/undraw_weather_re_qsmd.svg" alt="Please Search Something" title="Please Search a City">
             </div>
         </main>
