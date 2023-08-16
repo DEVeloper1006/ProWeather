@@ -226,7 +226,7 @@ input:checked::after {
 }
 
 .other-details {
-    @apply col-span-3 md-lg:col-span-4 select-none;
+    @apply col-span-3 lg:col-span-4 select-none;
     @apply flex flex-col justify-evenly items-center gap-4;
     height: fit-content;
     border: none;
@@ -244,7 +244,7 @@ input:checked::after {
 }
 
 .details-grid {
-    @apply flex flex-wrap justify-evenly items-center w-full;
+    @apply flex flex-wrap items-center w-full;
     border: 2px solid red;
 }
 
@@ -254,7 +254,7 @@ input:checked::after {
 
 .ss-wrap {
     @apply flex flex-col justify-evenly items-center p-2 bg-stone-900 rounded-3xl;
-    width: 150px;
+    width: 200px;
     height: 250px;
 }
 

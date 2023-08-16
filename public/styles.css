@@ -563,6 +563,10 @@ video {
   padding: 1rem;
 }
 
+.text-center{
+  text-align: center;
+}
+
 .font-body{
   font-family: Poppins;
 }
@@ -991,7 +995,7 @@ input:checked::after {
           user-select: none;
 }
 
-@media (min-width: 915px){
+@media (min-width: 1024px){
   .other-details{
     grid-column: span 4 / span 4;
   }
@@ -1038,7 +1042,6 @@ input:checked::after {
   width: 100%;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-evenly;
   border: 2px solid red;
 }
 
@@ -1055,7 +1058,7 @@ input:checked::after {
   --tw-bg-opacity: 1;
   background-color: rgb(28 25 23 / var(--tw-bg-opacity));
   padding: 0.5rem;
-  width: 150px;
+  width: 200px;
   height: 250px;
 }
 
