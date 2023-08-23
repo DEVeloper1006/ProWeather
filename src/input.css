@@ -135,12 +135,12 @@ main {
 }
 
 .current-info {
-    @apply grid grid-cols-3 md-lg:grid-cols-6 gap-5;
+    @apply grid grid-cols-2 lg:grid-cols-6 gap-5;
     width: 100%;
 }
 
 .current-weather {
-    @apply col-span-3 lg:col-span-2;
+    @apply col-span-3;
     height: fit-content;
     border: none;
     outline: none;
@@ -167,11 +167,12 @@ main {
 
 .weather-type {
     @apply text-sm;
-    transform: translateY(-3px);
+    transform: translateY(15px);
 }
 
 .weather-img {
     @apply w-3/4 h-full;
+    transform: translate(-10px, 15px);
 }
 
 .temperature {
@@ -179,17 +180,18 @@ main {
 } 
 
 .temp {
-    @apply text-7xl md-lg:text-4xl md-lg-sm:text-7xl font-bold transition duration-150 ease-in;
+    @apply text-5xl lg:text-6xl font-bold transition duration-150 ease-in;
     transform: translateY(18px);
 }
 
 .feels-like {
     @apply text-xs text-red-500;
-    transform: translateY(28px);
+    transform: translateY(20px);
 }
 
 .toggle-switch { 
-    @apply mt-8 flex w-full gap-8 justify-center items-center; 
+    @apply mt-8 flex w-full gap-5 justify-center items-center; 
+    transform: translateY(15px);
 }
 
 .toggle {
@@ -226,7 +228,7 @@ input:checked::after {
 }
 
 .other-details {
-    @apply col-span-3 lg:col-span-4 select-none;
+    @apply col-span-3 select-none;
     @apply flex flex-col justify-evenly items-center gap-4;
     height: fit-content;
     border: none;
@@ -244,29 +246,44 @@ input:checked::after {
 }
 
 .details-grid {
-    @apply flex flex-wrap items-center w-full;
-    border: 2px solid red;
+    @apply flex flex-wrap items-center w-full gap-5;
 }
 
 .details-grid > * {
-    flex: 1 1 20%;
+    flex: 1 1 50%;
 }
 
 .ss-wrap {
-    @apply flex flex-col justify-evenly items-center p-2 bg-stone-900 rounded-3xl;
-    width: 200px;
-    height: 250px;
+    @apply flex flex-col justify-evenly items-center p-2 gap-3 bg-stone-900 rounded-3xl;
 }
 
 .rise-set {
-    @apply flex justify-between items-center w-full p-5 select-none transition duration-150 ease-in-out rounded-2xl;
+    @apply flex justify-between items-center w-full p-7 select-none transition duration-150 ease-in-out rounded-2xl;
 }
 
 .rise-set:hover {
     @apply bg-red-700 shadow-slate-50 shadow-sm;
 }
 
+.wind-info {
+    @apply bg-stone-900 rounded-3xl flex flex-col justify-evenly items-center p-2 gap-3;
+}
 
+.speed,.direction{
+    @apply flex justify-between items-center w-full select-none rounded-2xl p-7 transition duration-150 ease-linear;
+}
+
+.speed:hover, .direction:hover{
+    @apply bg-red-700 shadow-slate-50 shadow-sm;
+}
+
+.toggleButtons {
+    @apply flex flex-wrap justify-evenly items-center w-full gap-5 p-5;
+}
+
+.speedToggle, .directionToggle {
+    @apply flex justify-evenly items-center gap-3;
+}
 
 .hide {
     display: none;

@@ -1,21 +1,25 @@
-import { DateTime } from "luxon";
+import {DateTime, FixedOffsetZone} from '../node_modules/luxon/src/luxon.js';
+
 
 const cityInput = document.getElementById('city');
 const cityName = document.getElementById('cityName');
 const getCurrentLocation = document.getElementById('location');
 const searchIcon = document.getElementById('searchIcon');
 const info = document.querySelector('.current-info');
-const topMenu = document.querySelector('.topMenu');
 const errScreen = document.querySelector('.search-something');
 const temp = document.querySelector('.temp');
 const weatherIcon = document.querySelector('.weather-img');
-const toggleUnit = document.getElementById('unit-switch');
+const toggleTempUnit = document.getElementById('temp-switch');
 const weatherDescr = document.querySelector('.weather-type');
 const feelsLikeTemp = document.getElementById("feels-like");
 const sunsetTime = document.getElementById('sunset');
 const sunriseTime = document.getElementById('sunrise');
+const windSpeed = document.getElementById('wind-speed');
+const windDirection = document.getElementById('wind-direction');
+const speedToggle = document.getElementById('speed-switch');
+const directionToggle = document.getElementById('direction-switch');
 
-function loadCountries() {
+async function loadCountries() {
     return fetch('countries.json')
         .then(response => response.json())
         .catch(error => {
@@ -141,7 +145,9 @@ function updateWeatherInfo (data) {
     updateTemperature(data.main);
     const system = data.sys;
     updateWeatherIcon(data.weather[0]);
-    setSunsetSunrise(system.sunrise, system.sunset);
+    calcSunriseSunset(system.sunrise, system.sunset, data.timezone);
+    calcWindSpeed(data.wind);
+    updateWindDirection(data.wind);
 }
 
 function updateTemperature (tempObject) {
@@ -178,19 +184,24 @@ function fahrenheitToCelsius (fahrenheit) {
     return Math.round(((fahrenheit - 32) * 5) / 9);
 }
 
-function unixTo12Hour (timeStamp) {
-    const date = new Date(timeStamp * 1000);
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    const twelveHourFormat = hours % 12 || 12;
-    const formattedTime = `${twelveHourFormat}:${minutes < 10 ? '0' : ''}${minutes} ${ampm}`;
-    return formattedTime;
+function calcSunriseSunset (sunrise, sunset, timezone) {
+    const zone = FixedOffsetZone.instance(timezone);
+    const sunriseDate = DateTime.fromSeconds(sunrise, zone);
+    const sunsetDate = DateTime.fromSeconds(sunset, zone);
+    sunriseTime.innerHTML = sunriseDate.toFormat("h:mm a");
+    sunsetTime.innerHTML = sunsetDate.toFormat("h:mm a");
 }
 
-function setSunsetSunrise (sunrise, sunset) {
-    sunriseTime.innerHTML = unixTo12Hour(sunrise);
-    sunsetTime.innerHTML = unixTo12Hour(sunset);
+function convertMStoKMH (ms) {
+    return Math.round(ms * 3.6);
+}
+
+function calcWindSpeed (windObject) {
+    windSpeed.innerHTML = convertMStoKMH(windObject.speed) + " km/h";
+}
+
+function updateWindDirection (windObject) {
+    windDirection.innerHTML = windObject.deg + "°";
 }
 
 getCurrentLocation.addEventListener('click', getCurrentLocationWeather);
@@ -202,7 +213,67 @@ searchIcon.addEventListener('click', () => {
     getLocationWeather();
 });
 
-function changeUnits () {
+function spliceTemperature (temperature){
+    let numericPart = '';
+    for (let i = 0; i < temperature.length; i++) {
+        if (!isNaN(temperature[i])) numericPart += temperature[i];
+    }
+    return numericPart;
+}
+
+function convertKMHtoMPH (kmh) {
+    return Math.round(kmh / 1.6);
+}
+
+function convertMPHtoKMH (mph) {
+    return Math.round(mph * 1.6);
+}
+
+function degreesToBearing(degrees) {
+    const primaryDirections = ['N', 'E', 'S', 'W'];
+    const secondaryDirections = ['NE', 'SE', 'SW', 'NW'];
+    
+    const primaryIndex = Math.floor((degrees + 22.5) / 90) % 4;
+    const secondaryIndex = Math.floor((degrees + 67.5) / 90) % 4;
+
+    const primaryDirection = primaryDirections[primaryIndex];
+    const secondaryDirection = secondaryDirections[secondaryIndex];
+
+    return `${primaryDirection} ${Math.round(degrees % 90)}° ${secondaryDirection}`;
+}
+
+function bearingToDegrees(bearingNotation) {
+    const parts = bearingNotation.split(' ');
+    const primaryDirection = parts[0];
+    const secondaryDirection = parts[2];
+    const degrees = parseInt(parts[1], 10);
+
+    const primaryDirections = ['N', 'E', 'S', 'W'];
+    const primaryIndex = primaryDirections.indexOf(primaryDirection);
+
+    if (primaryIndex === -1) {
+        return NaN; // Invalid bearing notation
+    }
+
+    const secondaryDirections = ['N', 'S', 'E', 'W'];
+    const secondaryIndex = secondaryDirections.indexOf(secondaryDirection);
+
+    if (secondaryIndex === -1) {
+        return NaN; // Invalid bearing notation
+    }
+
+    const baseAngle = primaryIndex * 90;
+    let secondaryAngle = 0;
+
+    if (secondaryIndex === 1 || secondaryIndex === 2) {
+        secondaryAngle = 45;
+    }
+
+    return baseAngle + degrees + secondaryAngle;
+}
+
+
+toggleTempUnit.addEventListener('change', () => {
     const oldTemp = temp.innerHTML;
     const parts = feelsLikeTemp.textContent.split(' ');
     if (oldTemp.endsWith("°C")) {
@@ -214,15 +285,16 @@ function changeUnits () {
         feelsLikeTemp.textContent = "Feels Like " + fahrenheitToCelsius(fahrenheitFeelsLike) + "°C";
         temp.innerHTML = fahrenheitToCelsius(spliceTemperature(oldTemp)) + "°C";
     }
-}
+});
 
-function spliceTemperature (temperature){
-    let numericPart = '';
-    for (let i = 0; i < temperature.length; i++) {
-        if (!isNaN(temperature[i])) numericPart += temperature[i];
-    }
-    return numericPart;
-}
+speedToggle.addEventListener('change', () => {
+    const parts = windSpeed.innerHTML.split(' ');
+    if (parts[1] === 'km/h') windSpeed.innerHTML = convertKMHtoMPH(Number(parts[0])) + " mph"; 
+    else windSpeed.innerHTML = convertMPHtoKMH(Number(parts[0])) + " km/h";
+});
 
-toggleUnit.addEventListener('change', changeUnits);
+directionToggle.addEventListener('change', () => {
+
+});
+
 

@@ -51,9 +51,9 @@
                         </div> 
                     </div>
                     <div class="toggle-switch">
-                        <h2>Celsius</h2>
-                        <input type="checkbox" id="unit-switch" class="toggle" name="toggle" title="Switch Units">
-                        <h2>Fahrenheit</h2>
+                        <h2>°C</h2>
+                        <input type="checkbox" id="temp-switch" class="toggle">
+                        <h2>°F</h2>
                     </div> 
                 </div>
                 <div class="other-details">
@@ -62,15 +62,34 @@
                         <div class="ss-wrap">
                             <div class="rise-set">
                                 <h1>Sunrise</h1>
-                                <h2 id="sunrise">8:00 PM</h2>
+                                <h3 id="sunrise">8:00 PM</h2>
                             </div>
                             <div class="rise-set">
                                 <h1>Sunset</h1>
-                                <h2 id="sunset">8:00 AM</h2>
+                                <h3 id="sunset">8:00 AM</h2>
                             </div>
                         </div>
                         <div class="wind-info">
-
+                            <div class="speed">
+                                <h1>Wind Speed</h1>
+                                <h4 id="wind-speed">15 km/h</h4>
+                            </div>
+                            <div class="direction">
+                                <h1>Wind Direction</h1>
+                                <h4 id="wind-direction">135°</h4>
+                            </div>
+                            <div class="toggleButtons">
+                                <div class="speedToggle">
+                                    <h2>km/h</h2>
+                                    <input type="checkbox" id="speed-switch" class="toggle">
+                                    <h2>mph</h2>
+                                </div>
+                                <div class="directionToggle">
+                                    <h2>Degrees</h2>
+                                    <input type="checkbox" id="direction-switch" class="toggle">
+                                    <h2>Bearing</h2>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -81,6 +100,7 @@
         </main>
 
         <script type="module" src="index.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.1/build/global/luxon.min.js"></script>
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
         <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
     </body>
