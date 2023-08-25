@@ -1,6 +1,7 @@
+//Imported Package
 import {DateTime, FixedOffsetZone} from '../node_modules/luxon/src/luxon.js';
 
-
+//All Glocal Elements
 const cityInput = document.getElementById('city');
 const cityName = document.getElementById('cityName');
 const getCurrentLocation = document.getElementById('location');
@@ -20,6 +21,10 @@ const speedToggle = document.getElementById('speed-switch');
 const directionToggle = document.getElementById('direction-switch');
 const latitude = document.getElementById('lat');
 const longitude = document.getElementById('lon');
+const humidity = document.getElementById('humidity');
+const minTemp = document.getElementById('min-temperature');
+const maxTemp = document.getElementById('max-temperature');
+const tempToggle = document.getElementById('temp-switch-2');
 
 async function loadCountries() {
     return fetch('countries.json')
@@ -31,7 +36,6 @@ async function loadCountries() {
 }
 
 let countries;
-
 const countriesPromise = loadCountries();
 countriesPromise.then(data => {
     countries = data;
@@ -150,11 +154,16 @@ function updateWeatherInfo (data) {
     updateTemperature(data.main);
     const system = data.sys;
     updateWeatherIcon(data.weather[0]);
+    updateHumidity(data.main.humidity);
     calcSunriseSunset(system.sunrise, system.sunset, data.timezone);
     calcWindSpeed(data.wind);
     updateWindDirection(data.wind);
     updateLat(data.coord.lat);
     updateLon(data.coord.lon);
+}
+
+function updateHumidity (value) {
+    humidity.innerHTML = Math.round(Number(value)) + "%";
 }
 
 function updateLat (lat) {
@@ -170,6 +179,10 @@ function updateTemperature (tempObject) {
     let kelvinFeelsLikeTemp = tempObject.feels_like;
     temp.innerHTML = kelvinToCelsius(kelvinTemp) + "°C";
     feelsLikeTemp.innerHTML = "Feels Like " + kelvinToCelsius(kelvinFeelsLikeTemp) + "°C";
+    maxTemp.innerHTML = (kelvinToCelsius(tempObject.temp_max)) + '°C';
+    minTemp.innerHTML = (kelvinToCelsius(tempObject.temp_min)) + '°C';
+
+
 }
 
 function updateDescription (description) {
@@ -287,7 +300,6 @@ function bearingToDegrees(bearingNotation) {
     return baseAngle + degrees + secondaryAngle + '°';
 }
 
-
 toggleTempUnit.addEventListener('change', () => {
     const oldTemp = temp.innerHTML;
     const parts = feelsLikeTemp.textContent.split(' ');
@@ -299,6 +311,18 @@ toggleTempUnit.addEventListener('change', () => {
         let fahrenheitFeelsLike = Number(parts[2].replace("°F", ""));
         feelsLikeTemp.textContent = "Feels Like " + fahrenheitToCelsius(fahrenheitFeelsLike) + "°C";
         temp.innerHTML = fahrenheitToCelsius(spliceTemperature(oldTemp)) + "°C";
+    }
+});
+
+tempToggle.addEventListener('change', () => {
+    const oldMin = minTemp.innerHTML;
+    const oldMax = maxTemp.innerHTML; 
+    if (oldMin.endsWith('°C')) {
+        minTemp.innerHTML = celsiusToFahrenheit(spliceTemperature(oldMin)) + "°F";
+        maxTemp.innerHTML = celsiusToFahrenheit(spliceTemperature(oldMax)) + "°F";
+    } else {
+        minTemp.innerHTML = fahrenheitToCelsius(spliceTemperature(oldMin)) + "°C";
+        maxTemp.innerHTML = fahrenheitToCelsius(spliceTemperature(oldMax)) + "°C";
     }
 });
 
@@ -316,5 +340,6 @@ directionToggle.addEventListener('change', () => {
         windDirection.innerHTML = bearingToDegrees(windDirection.innerHTML);
     }
 });
+
 
 

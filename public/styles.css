@@ -591,6 +591,7 @@ video {
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
 }
 
 .center {
@@ -810,19 +811,16 @@ main {
 }
 
 .current-info{
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2.5rem;
-}
-
-@media (min-width: 1024px){
-  .current-info{
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-  }
-}
-
-.current-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  gap: 1.5rem;
   width: 100%;
+}
+
+.current-info > * {
+  flex: 1 1 48%;
 }
 
 .current-weather{
@@ -1006,7 +1004,7 @@ input:checked::after {
 }
 
 .other-details:hover {
-  transform: translateY(-5%);
+  transform: translateY(-25px);
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
@@ -1026,7 +1024,7 @@ input:checked::after {
   flex: 1 1 50%;
 }
 
-.ss-wrap, .wind-info{
+.ss-wrap, .wind-info, .more-temp-info{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1042,7 +1040,7 @@ input:checked::after {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   border-radius: 1.5rem;
   --tw-bg-opacity: 1;
   background-color: rgb(28 25 23 / var(--tw-bg-opacity));
@@ -1051,7 +1049,7 @@ input:checked::after {
 
 .lat-lon{
   display: flex;
-  width: 33.333333%;
+  width: 50%;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
@@ -1083,7 +1081,7 @@ input:checked::after {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.rise-set:hover, .speed:hover, .direction:hover, .lat-lon:hover{
+.rise-set:hover, .speed:hover, .direction:hover, .lat-lon:hover, .min-max:hover, .humidity:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(185 28 28 / var(--tw-bg-opacity));
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -1093,7 +1091,7 @@ input:checked::after {
   --tw-shadow: var(--tw-shadow-colored);
 }
 
-.speed,.direction{
+.speed,.direction, .humidity, .min-max{
   display: flex;
   width: 100%;
   -webkit-user-select: none;
@@ -1127,6 +1125,20 @@ input:checked::after {
   align-items: center;
   justify-content: space-evenly;
   gap: 0.75rem;
+}
+
+.radar {
+  width: 500px;
+  height: 500px;
+}
+
+.temp-switch-wrap{
+  margin-bottom: 0.5rem;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .hide {
