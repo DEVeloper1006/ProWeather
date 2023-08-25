@@ -18,6 +18,8 @@ const windSpeed = document.getElementById('wind-speed');
 const windDirection = document.getElementById('wind-direction');
 const speedToggle = document.getElementById('speed-switch');
 const directionToggle = document.getElementById('direction-switch');
+const latitude = document.getElementById('lat');
+const longitude = document.getElementById('lon');
 
 async function loadCountries() {
     return fetch('countries.json')
@@ -123,7 +125,10 @@ function fetchWeatherData(location) {
                 const countryName = country ? country.name : countryCode;
                 const formattedLocation = `${city}, ${countryName}`;
                 updateCityName(formattedLocation);
-                //errScreen.classList.add('hide');
+                toggleTempUnit.checked = false;
+                speedToggle.checked = false;
+                directionToggle.checked = false;
+                errScreen.classList.add('hide');
                 cityInput.value = "";
                 updateWeatherInfo(data);
                 console.log(data); 
@@ -148,6 +153,16 @@ function updateWeatherInfo (data) {
     calcSunriseSunset(system.sunrise, system.sunset, data.timezone);
     calcWindSpeed(data.wind);
     updateWindDirection(data.wind);
+    updateLat(data.coord.lat);
+    updateLon(data.coord.lon);
+}
+
+function updateLat (lat) {
+    latitude.innerHTML = Math.round(Number(lat)) + "°";
+}
+
+function updateLon(lon) {
+    longitude.innerHTML = Math.round(Number(lon)) + "°";
 }
 
 function updateTemperature (tempObject) {
@@ -231,7 +246,7 @@ function convertMPHtoKMH (mph) {
 
 function degreesToBearing(degrees) {
     const primaryDirections = ['N', 'E', 'S', 'W'];
-    const secondaryDirections = ['NE', 'SE', 'SW', 'NW'];
+    const secondaryDirections = ['N', 'E', 'S', 'W'];
     
     const primaryIndex = Math.floor((degrees + 22.5) / 90) % 4;
     const secondaryIndex = Math.floor((degrees + 67.5) / 90) % 4;
@@ -269,7 +284,7 @@ function bearingToDegrees(bearingNotation) {
         secondaryAngle = 45;
     }
 
-    return baseAngle + degrees + secondaryAngle;
+    return baseAngle + degrees + secondaryAngle + '°';
 }
 
 
@@ -294,7 +309,12 @@ speedToggle.addEventListener('change', () => {
 });
 
 directionToggle.addEventListener('change', () => {
-
+    if (windDirection.innerHTML.endsWith('°')) {
+        const degrees = windDirection.innerHTML.slice(0, windDirection.innerHTML.indexOf('°'));
+        windDirection.innerHTML = degreesToBearing(degrees);
+    } else {
+        windDirection.innerHTML = bearingToDegrees(windDirection.innerHTML);
+    }
 });
 
 

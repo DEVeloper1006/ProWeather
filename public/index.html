@@ -37,7 +37,7 @@
 
         <main>
             <h1 class="text-5xl text-slate-100 select-none" id="cityName">Please Search a City</h1>
-            <div class="current-info">
+            <div class="current-info hide">
                 <div class="current-weather select-none text-center">
                     <h2 class="current-title">Current Weather</h2>
                     <div class="info-wrap">
@@ -91,10 +91,23 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="loc-info">
+                            <div class="lat-lon">
+                                <h1>Latitude</h1>
+                                <h4 id="lat">90°</h4>
+                            </div>
+                            <div class="lat-lon">
+                                <h1>Longitude</h1>
+                                <h4 id="lon">90°</h4>
+                            </div>
+                        </div>
+                        <div class="more-temp-info">
+                            
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="search-something hide">
+            <div class="search-something">
                 <img src="openweathermap/undraw_weather_re_qsmd.svg" alt="Please Search Something" title="Please Search a City">
             </div>
         </main>

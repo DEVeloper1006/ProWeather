@@ -135,7 +135,7 @@ main {
 }
 
 .current-info {
-    @apply grid grid-cols-2 lg:grid-cols-6 gap-5;
+    @apply grid grid-cols-2 lg:grid-cols-6 gap-10;
     width: 100%;
 }
 
@@ -253,28 +253,28 @@ input:checked::after {
     flex: 1 1 50%;
 }
 
-.ss-wrap {
+.ss-wrap, .wind-info{
     @apply flex flex-col justify-evenly items-center p-2 gap-3 bg-stone-900 rounded-3xl;
 }
 
+.loc-info {
+    @apply flex flex-wrap justify-evenly items-center p-5 bg-stone-900 rounded-3xl;
+}
+
+.lat-lon {
+    @apply w-1/3 flex flex-wrap justify-between items-center p-5 rounded-2xl transition duration-150 ease-linear;
+}
+
 .rise-set {
-    @apply flex justify-between items-center w-full p-7 select-none transition duration-150 ease-in-out rounded-2xl;
+    @apply flex flex-wrap justify-between items-center w-full p-7 select-none transition duration-150 ease-in-out rounded-2xl;
 }
 
-.rise-set:hover {
+.rise-set:hover, .speed:hover, .direction:hover, .lat-lon:hover{
     @apply bg-red-700 shadow-slate-50 shadow-sm;
-}
-
-.wind-info {
-    @apply bg-stone-900 rounded-3xl flex flex-col justify-evenly items-center p-2 gap-3;
 }
 
 .speed,.direction{
-    @apply flex justify-between items-center w-full select-none rounded-2xl p-7 transition duration-150 ease-linear;
-}
-
-.speed:hover, .direction:hover{
-    @apply bg-red-700 shadow-slate-50 shadow-sm;
+    @apply flex justify-between items-center w-full select-none rounded-2xl p-7 transition duration-150 ease-linear flex-wrap;
 }
 
 .toggleButtons {

@@ -812,7 +812,7 @@ main {
 .current-info{
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.25rem;
+  gap: 2.5rem;
 }
 
 @media (min-width: 1024px){
@@ -1026,7 +1026,7 @@ input:checked::after {
   flex: 1 1 50%;
 }
 
-.ss-wrap{
+.ss-wrap, .wind-info{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1038,12 +1038,40 @@ input:checked::after {
   padding: 0.5rem;
 }
 
+.loc-info{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 1.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(28 25 23 / var(--tw-bg-opacity));
+  padding: 1.25rem;
+}
+
+.lat-lon{
+  display: flex;
+  width: 33.333333%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  transition-timing-function: linear;
+}
+
 .rise-set{
   display: flex;
   width: 100%;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   border-radius: 1rem;
@@ -1055,7 +1083,7 @@ input:checked::after {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.rise-set:hover{
+.rise-set:hover, .speed:hover, .direction:hover, .lat-lon:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(185 28 28 / var(--tw-bg-opacity));
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -1065,24 +1093,13 @@ input:checked::after {
   --tw-shadow: var(--tw-shadow-colored);
 }
 
-.wind-info{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  gap: 0.75rem;
-  border-radius: 1.5rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(28 25 23 / var(--tw-bg-opacity));
-  padding: 0.5rem;
-}
-
 .speed,.direction{
   display: flex;
   width: 100%;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   border-radius: 1rem;
@@ -1093,16 +1110,6 @@ input:checked::after {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
   transition-timing-function: linear;
-}
-
-.speed:hover, .direction:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(185 28 28 / var(--tw-bg-opacity));
-  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-  --tw-shadow-color: #f8fafc;
-  --tw-shadow: var(--tw-shadow-colored);
 }
 
 .toggleButtons{
