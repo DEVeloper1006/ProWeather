@@ -6,10 +6,11 @@
         <title>ProWeather</title>
         <meta name="Title" content="ProWeather">
         <meta name="Author" content="Dev Mody">
-        <meta name="Description" content="This is a website that actively checks weather from all around the world and provides information to users regarding a certain location's temperature, feels-like temperature, pressure, and more.">
+        <meta name="Description" content="This is a website that actively checks weather from all around the world and provides information to users regarding a certain location's temperature, feels-like temperature, humidity, and more.">
         <link rel="stylesheet" href="styles.css">
         <link rel="icon" href="img/weather-logo.png" type="image/x-icon">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <head>
     <body class="font-body bg-stone-950">
         <div class="top-menu">
@@ -38,23 +39,25 @@
         <main>
             <h1 class="text-5xl text-slate-100 select-none" id="cityName">Please Search a City</h1>
             <div class="current-info hide">
-                <div class="current-weather select-none text-center">
-                    <h2 class="current-title">Current Weather</h2>
-                    <div class="info-wrap">
-                        <div class="weather">
-                            <img src="openweathermap/01n.svg" alt="Partly Cloudy" title="Partly Cloudy" class="weather-img">
-                            <h2 class="weather-type"></h2>
+                <div class="container">
+                    <div class="current-weather select-none text-center">
+                        <h2 class="current-title">Current Weather</h2>
+                        <div class="info-wrap">
+                            <div class="weather">
+                                <img src="openweathermap/01n.svg" alt="Partly Cloudy" title="Partly Cloudy" class="weather-img">
+                                <h2 class="weather-type"></h2>
+                            </div>
+                            <div class="temperature">
+                                <h1 class="temp z-10">10°C</h1>
+                                <h5 class="feels-like" id="feels-like">Feels Like 10°C</h5>
+                            </div> 
                         </div>
-                        <div class="temperature">
-                            <h1 class="temp z-10">10°C</h1>
-                            <h5 class="feels-like" id="feels-like">Feels Like 10°C</h5>
+                        <div class="toggle-switch">
+                            <h2>°C</h2>
+                            <input type="checkbox" id="temp-switch" class="toggle">
+                            <h2>°F</h2>
                         </div> 
                     </div>
-                    <div class="toggle-switch">
-                        <h2>°C</h2>
-                        <input type="checkbox" id="temp-switch" class="toggle">
-                        <h2>°F</h2>
-                    </div> 
                 </div>
                 <div class="other-details">
                     <h1>More Details</h1>

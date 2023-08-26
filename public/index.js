@@ -135,7 +135,7 @@ function fetchWeatherData(location) {
                 errScreen.classList.add('hide');
                 cityInput.value = "";
                 updateWeatherInfo(data);
-                console.log(data); 
+                console.log(data);
             } else {
                 alert("City Not Found.");
                 cityInput.value = "";
@@ -283,7 +283,7 @@ function bearingToDegrees(bearingNotation) {
         return NaN; // Invalid bearing notation
     }
 
-    const secondaryDirections = ['N', 'S', 'E', 'W'];
+    const secondaryDirections = ['N', 'E', 'S', 'W'];
     const secondaryIndex = secondaryDirections.indexOf(secondaryDirection);
 
     if (secondaryIndex === -1) {
@@ -293,7 +293,7 @@ function bearingToDegrees(bearingNotation) {
     const baseAngle = primaryIndex * 90;
     let secondaryAngle = 0;
 
-    if (secondaryIndex === 1 || secondaryIndex === 2) {
+    if (secondaryIndex === 1 || secondaryIndex === 3) {
         secondaryAngle = 45;
     }
 
