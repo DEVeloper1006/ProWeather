@@ -133,7 +133,7 @@ function fetchWeatherData(location) {
                 toggleTempUnit.checked = false;
                 speedToggle.checked = false;
                 directionToggle.checked = false;
-                errScreen.classList.add('hide');
+                //errScreen.classList.add('hide');
                 cityInput.value = "";
                 updateWeatherInfo(data);
                 updateRadar(data);

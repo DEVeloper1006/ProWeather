@@ -146,13 +146,6 @@ main {
 
 .current-weather {
     height: fit-content;
-    border: none;
-    outline: none;
-    background: none;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    background-color: rgba(255, 255,255, 0.1);
-    @apply rounded-2xl text-slate-50 cursor-pointer transition duration-150 ease-in;
     @apply flex p-9 flex-col items-center justify-center;
 }
 
@@ -162,7 +155,7 @@ main {
 }
 
 .container {
-    @apply flex flex-col gap-5 justify-between;
+    @apply flex flex-col gap-7 justify-between;
 }
 
 .info-wrap {
@@ -235,34 +228,30 @@ input:checked::after {
     left: 70%;
 }
 
-.future-weather {
-    @apply w-full rounded-2xl cursor-pointer p-10 text-slate-50 select-none;
-    height: fit-content;
-    border: 2px solid red;
+.future-weather, .other-details, .current-weather {
+    @apply rounded-2xl p-10 text-slate-50 cursor-pointer transition duration-150 ease-in;
     border: none;
     outline: none;
     background: none;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     background-color: rgba(255, 255,255, 0.1);
+}
+
+.future-weather {
+    @apply w-full text-center;
+    height: fit-content;
+}
+
+.future-weather:hover, .other-details:hover {
+    transform: translateY(-25px);
+    @apply shadow-gray-400 shadow-lg;
 }
 
 .other-details {
     @apply select-none;
     @apply flex flex-col justify-evenly items-center gap-4;
     height: fit-content;
-    border: none;
-    outline: none;
-    background: none;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    background-color: rgba(255, 255,255, 0.1);
-    @apply rounded-2xl p-10 text-slate-50 cursor-pointer transition duration-150 ease-in;
-}
-
-.other-details:hover {
-    transform: translateY(-25px);
-    @apply shadow-gray-400 shadow-lg;
 }
 
 .details-grid {
@@ -324,6 +313,24 @@ input:checked::after {
     background-color: rgba(255, 255,255, 0.1);
     @apply relative p-10 rounded-2xl transition duration-150 ease-in cursor-pointer;
 }
+
+.future-card {@apply p-5 bg-stone-900 rounded-2xl mt-3 transition duration-150 ease-out;}
+
+.future-info {
+    @apply flex flex-wrap justify-between items-center relative;
+    height: fit-content;
+}
+
+.future-info h2 {
+    @apply absolute right-2 opacity-5 w-full text-end;
+    font-size: 5vw;
+}
+
+.future-weather-type {@apply flex justify-center items-center w-1/5 ml-6 gap-3;}
+
+.future-temperature {@apply flex gap-3 items-center justify-end w-1/3 pt-2;}
+
+.future-toggles {@apply flex justify-center items-center w-full gap-3 mt-4}
 
 .search-something:hover {
     transform: translateY(-5%);
