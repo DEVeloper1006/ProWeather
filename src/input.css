@@ -237,7 +237,7 @@ input:checked::after {
 
 .radar {
     @apply w-full rounded-2xl cursor-pointer;
-    height: 35rem;
+    height: 25rem;
     border: 2px solid red;
 }
 

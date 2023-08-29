@@ -1028,7 +1028,7 @@ input:checked::after {
   width: 100%;
   cursor: pointer;
   border-radius: 1rem;
-  height: 35rem;
+  height: 25rem;
   border: 2px solid red;
 }
 
