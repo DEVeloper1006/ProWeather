@@ -25,6 +25,7 @@ const humidity = document.getElementById('humidity');
 const minTemp = document.getElementById('min-temperature');
 const maxTemp = document.getElementById('max-temperature');
 const tempToggle = document.getElementById('temp-switch-2');
+let map;
 
 async function loadCountries() {
     return fetch('countries.json')
@@ -161,14 +162,6 @@ function updateWeatherInfo (data) {
     updateWindDirection(data.wind);
     updateLat(data.coord.lat);
     updateLon(data.coord.lon);
-}
-
-function updateRadar (data) {
-    let map = L.map('map').setView([51.505, -0.09], 13);
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© OpenStreetMap'
-    }).addTo(map);
 }
 
 function updateHumidity (value) {
