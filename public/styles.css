@@ -1024,12 +1024,25 @@ input:checked::after {
   left: 70%;
 }
 
-.radar{
+.future-weather{
   width: 100%;
   cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   border-radius: 1rem;
-  height: 25rem;
+  padding: 2.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(248 250 252 / var(--tw-text-opacity));
+  height: -moz-fit-content;
+  height: fit-content;
   border: 2px solid red;
+  border: none;
+  outline: none;
+  background: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(255, 255,255, 0.1);
 }
 
 .other-details{

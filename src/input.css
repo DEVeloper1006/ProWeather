@@ -235,10 +235,16 @@ input:checked::after {
     left: 70%;
 }
 
-.radar {
-    @apply w-full rounded-2xl cursor-pointer;
-    height: 25rem;
+.future-weather {
+    @apply w-full rounded-2xl cursor-pointer p-10 text-slate-50 select-none;
+    height: fit-content;
     border: 2px solid red;
+    border: none;
+    outline: none;
+    background: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(255, 255,255, 0.1);
 }
 
 .other-details {
