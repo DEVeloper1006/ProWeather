@@ -135,6 +135,7 @@ function fetchWeatherData(location) {
                 errScreen.classList.add('hide');
                 cityInput.value = "";
                 updateWeatherInfo(data);
+                updateRadar(data);
                 console.log(data);
             } else {
                 alert("City Not Found.");
@@ -162,6 +163,14 @@ function updateWeatherInfo (data) {
     updateLon(data.coord.lon);
 }
 
+function updateRadar (data) {
+    let map = L.map('map').setView([51.505, -0.09], 13);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+}).addTo(map);
+}
+
 function updateHumidity (value) {
     humidity.innerHTML = Math.round(Number(value)) + "%";
 }
@@ -181,8 +190,6 @@ function updateTemperature (tempObject) {
     feelsLikeTemp.innerHTML = "Feels Like " + kelvinToCelsius(kelvinFeelsLikeTemp) + "°C";
     maxTemp.innerHTML = (kelvinToCelsius(tempObject.temp_max)) + '°C';
     minTemp.innerHTML = (kelvinToCelsius(tempObject.temp_min)) + '°C';
-
-
 }
 
 function updateDescription (description) {

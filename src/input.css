@@ -162,7 +162,7 @@ main {
 }
 
 .container {
-    @apply flex flex-col;
+    @apply flex flex-col gap-5 justify-between;
 }
 
 .info-wrap {
@@ -236,9 +236,8 @@ input:checked::after {
 }
 
 .radar {
-    @apply w-full;
-    width: 100%;
-    height: 45rem;
+    @apply w-full rounded-2xl cursor-pointer;
+    height: 35rem;
     border: 2px solid red;
 }
 
