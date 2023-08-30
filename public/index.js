@@ -25,18 +25,6 @@ const minTemp = document.getElementById('min-temperature');
 const maxTemp = document.getElementById('max-temperature');
 const tempToggle = document.getElementById('temp-switch-2');
 
-const topTemp1 = document.getElementById('top-temp-1');
-const topTemp2 = document.getElementById('top-temp-2');
-const topTemp3 = document.getElementById('top-temp-3');
-const topTemp4 = document.getElementById('top-temp-4');
-const topTemp5 = document.getElementById('top-temp-5');
-
-const bottomTemp1 = document.getElementById('bottom-temp-1');
-const bottomTemp2 = document.getElementById('bottom-temp-2');
-const bottomTemp3 = document.getElementById('bottom-temp-3');
-const bottomTemp4 = document.getElementById('bottom-temp-4');
-const bottomTemp5 = document.getElementById('bottom-temp-5');
-
 const futureImg1 = document.getElementById('future-img-1');
 const futureImg2 = document.getElementById('future-img-2');
 const futureImg3 = document.getElementById('future-img-3');
@@ -327,6 +315,7 @@ function bearingToDegrees(bearingNotation) {
     return baseAngle + degrees + secondaryAngle + '°';
 }
 
+
 toggleTempUnit.addEventListener('change', () => {
     const oldTemp = temp.innerHTML;
     const parts = feelsLikeTemp.textContent.split(' ');
@@ -366,7 +355,7 @@ directionToggle.addEventListener('change', () => {
     } else {
         windDirection.innerHTML = bearingToDegrees(windDirection.innerHTML);
     }
-});
+}); 
 
 function fetchForecastData(weatherData, key) {
     const futureUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}&appid=${key}`;
@@ -374,11 +363,57 @@ function fetchForecastData(weatherData, key) {
         .then(response => response.json())
         .then(data => {
             console.log("Forecast Data:", data);
+            updateForecastData(data);
         })
         .catch(error => {
             console.error("Error fetching forecast data:", error);
         });
 };
 
+function updateForecastData(data) {
+    const maxMinTemps = getMaxMinForecastTemps(data);
+    updateDayNames(maxMinTemps);
+    updateDailyWeather(maxMinTemps);
+}
+
+function updateDayNames (obj) {
+    let counter = 1;
+    for (let day in obj) {
+        let date = new Date(day);
+        const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        let dayOfWeek = daysOfWeek[date.getDay()];
+        document.getElementById(`future-day-${counter}`).innerHTML = dayOfWeek;
+        counter++;
+    }
+}
+
+function getMaxMinForecastTemps (data) {
+    const dailyTemps = {};
+    data.list.forEach(item => {
+        const date = new Date(item.dt * 1000);
+        const day = date.toISOString().split('T')[0];
+        const temperature = kelvinToCelsius(item.main.temp_max);
+        if (!dailyTemps[day]) {
+            dailyTemps[day] = { max: temperature, min: temperature };
+        } else {
+            if (temperature > kelvinToCelsius(dailyTemps[day].max)) {
+                dailyTemps[day].max = temperature;
+            }
+            if (temperature < kelvinToCelsius(dailyTemps[day].min)) {
+                dailyTemps[day].min = temperature;
+            }
+        }
+    });
+    return dailyTemps;
+}
+
+function updateDailyWeather (maxMin) {
+    let counter = 1;
+    for (let day in maxMin){
+        document.getElementById(`top-temp-${counter}`).innerHTML = maxMin[day].max + "°C";
+        document.getElementById(`bottom-temp-${counter}`).innerHTML = maxMin[day].min + "°C";
+        counter++;
+    }
+}
 
 
