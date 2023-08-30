@@ -24,18 +24,13 @@ const humidity = document.getElementById('humidity');
 const minTemp = document.getElementById('min-temperature');
 const maxTemp = document.getElementById('max-temperature');
 const tempToggle = document.getElementById('temp-switch-2');
+const futureSwitch = document.getElementById('future-temp-switch');
 
 const futureImg1 = document.getElementById('future-img-1');
 const futureImg2 = document.getElementById('future-img-2');
 const futureImg3 = document.getElementById('future-img-3');
 const futureImg4 = document.getElementById('future-img-4');
 const futureImg5 = document.getElementById('future-img-5');
-
-const futureDay1 = document.getElementById('future-day-1');
-const futureDay2 = document.getElementById('future-day-2');
-const futureDay3 = document.getElementById('future-day-3');
-const futureDay4 = document.getElementById('future-day-4');
-const futureDay5 = document.getElementById('future-day-5');
 
 async function loadCountries() {
     return fetch('countries.json')
@@ -415,5 +410,23 @@ function updateDailyWeather (maxMin) {
         counter++;
     }
 }
+
+futureSwitch.addEventListener('change', () => {
+    if (document.getElementById('top-temp-1').innerHTML.endsWith("°C")) {
+        for (let i = 1; i < 6; i++) {
+            let oldMax = Number(document.getElementById(`top-temp-${i}`).innerHTML.split('°')[0]);
+            let oldMin = Number(document.getElementById(`bottom-temp-${i}`).innerHTML.split('°')[0]);
+            document.getElementById(`top-temp-${i}`).innerHTML = celsiusToFahrenheit(oldMax) + "°F";
+            document.getElementById(`bottom-temp-${i}`).innerHTML = celsiusToFahrenheit(oldMin) + "°F";
+        }
+    } else {
+        for (let i = 1; i < 6; i++) {
+            let oldMax = Number(document.getElementById(`top-temp-${i}`).innerHTML.split('°')[0]);
+            let oldMin = Number(document.getElementById(`bottom-temp-${i}`).innerHTML.split('°')[0]);
+            document.getElementById(`top-temp-${i}`).innerHTML = fahrenheitToCelsius(oldMax) + "°C";
+            document.getElementById(`bottom-temp-${i}`).innerHTML = fahrenheitToCelsius(oldMin) + "°C";
+        }
+    }
+})
 
 
