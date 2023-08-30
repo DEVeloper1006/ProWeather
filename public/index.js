@@ -310,7 +310,6 @@ function bearingToDegrees(bearingNotation) {
     return baseAngle + degrees + secondaryAngle + '°';
 }
 
-
 toggleTempUnit.addEventListener('change', () => {
     const oldTemp = temp.innerHTML;
     const parts = feelsLikeTemp.textContent.split(' ');
@@ -367,6 +366,11 @@ function fetchForecastData(weatherData, key) {
 
 function updateForecastData(data) {
     const maxMinTemps = getMaxMinForecastTemps(data);
+    const coordinates = {
+        'lat': data.city.coord.lat,
+        'lon': data.city.coord.lon
+    };
+
     updateDayNames(maxMinTemps);
     updateDailyWeather(maxMinTemps);
 }
@@ -375,7 +379,7 @@ function updateDayNames (obj) {
     let counter = 1;
     for (let day in obj) {
         let date = new Date(day);
-        const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
         let dayOfWeek = daysOfWeek[date.getDay()];
         document.getElementById(`future-day-${counter}`).innerHTML = dayOfWeek;
         counter++;
