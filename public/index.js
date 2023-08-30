@@ -1,5 +1,4 @@
-//Imported Package
-import {DateTime, FixedOffsetZone} from '../node_modules/luxon/src/luxon.js';
+import {DateTime} from '../node_modules/luxon/src/luxon.js';
 
 //All Glocal Elements
 const cityInput = document.getElementById('city');
@@ -25,7 +24,30 @@ const humidity = document.getElementById('humidity');
 const minTemp = document.getElementById('min-temperature');
 const maxTemp = document.getElementById('max-temperature');
 const tempToggle = document.getElementById('temp-switch-2');
-let map;
+
+const topTemp1 = document.getElementById('top-temp-1');
+const topTemp2 = document.getElementById('top-temp-2');
+const topTemp3 = document.getElementById('top-temp-3');
+const topTemp4 = document.getElementById('top-temp-4');
+const topTemp5 = document.getElementById('top-temp-5');
+
+const bottomTemp1 = document.getElementById('bottom-temp-1');
+const bottomTemp2 = document.getElementById('bottom-temp-2');
+const bottomTemp3 = document.getElementById('bottom-temp-3');
+const bottomTemp4 = document.getElementById('bottom-temp-4');
+const bottomTemp5 = document.getElementById('bottom-temp-5');
+
+const futureImg1 = document.getElementById('future-img-1');
+const futureImg2 = document.getElementById('future-img-2');
+const futureImg3 = document.getElementById('future-img-3');
+const futureImg4 = document.getElementById('future-img-4');
+const futureImg5 = document.getElementById('future-img-5');
+
+const futureDay1 = document.getElementById('future-day-1');
+const futureDay2 = document.getElementById('future-day-2');
+const futureDay3 = document.getElementById('future-day-3');
+const futureDay4 = document.getElementById('future-day-4');
+const futureDay5 = document.getElementById('future-day-5');
 
 async function loadCountries() {
     return fetch('countries.json')
@@ -136,8 +158,8 @@ function fetchWeatherData(location) {
                 //errScreen.classList.add('hide');
                 cityInput.value = "";
                 updateWeatherInfo(data);
-                updateRadar(data);
                 console.log(data);
+                fetchForecastData(data, apiKey);
             } else {
                 alert("City Not Found.");
                 cityInput.value = "";
@@ -154,10 +176,9 @@ function updateCityName(city) {
 
 function updateWeatherInfo (data) {
     updateTemperature(data.main);
-    const system = data.sys;
     updateWeatherIcon(data.weather[0]);
     updateHumidity(data.main.humidity);
-    calcSunriseSunset(system.sunrise, system.sunset, data.timezone);
+    calcSunriseSunset(data);
     calcWindSpeed(data.wind);
     updateWindDirection(data.wind);
     updateLat(data.coord.lat);
@@ -212,12 +233,18 @@ function fahrenheitToCelsius (fahrenheit) {
     return Math.round(((fahrenheit - 32) * 5) / 9);
 }
 
-function calcSunriseSunset (sunrise, sunset, timezone) {
-    const zone = FixedOffsetZone.instance(timezone);
-    const sunriseDate = DateTime.fromSeconds(sunrise, zone);
-    const sunsetDate = DateTime.fromSeconds(sunset, zone);
-    sunriseTime.innerHTML = sunriseDate.toFormat("h:mm a");
-    sunsetTime.innerHTML = sunsetDate.toFormat("h:mm a");
+function calcSunriseSunset(data) { 
+    const geoAPI = "582630bfc17d473398bba6fd8dce0dc8";
+    fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${data.coord.lat}&lon=${data.coord.lon}&format=json&apiKey=${geoAPI}`)
+        .then(response => response.json())
+        .then(result => {
+            const timeZoneName = result.results[0].timezone.name;
+            const sunriseDate = DateTime.fromSeconds(data.sys.sunrise, {zone:timeZoneName});
+            const sunsetDate = DateTime.fromSeconds(data.sys.sunset, {zone:timeZoneName});
+            sunriseTime.innerHTML = sunriseDate.toFormat("h:mm a");
+            sunsetTime.innerHTML = sunsetDate.toFormat("h:mm a");
+        })
+        .catch(error => console.log('error', error));
 }
 
 function convertMStoKMH (ms) {
@@ -340,6 +367,18 @@ directionToggle.addEventListener('change', () => {
         windDirection.innerHTML = bearingToDegrees(windDirection.innerHTML);
     }
 });
+
+function fetchForecastData(weatherData, key) {
+    const futureUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}&appid=${key}`;
+    fetch(futureUrl)
+        .then(response => response.json())
+        .then(data => {
+            console.log("Forecast Data:", data);
+        })
+        .catch(error => {
+            console.error("Error fetching forecast data:", error);
+        });
+};
 
 
 

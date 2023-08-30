@@ -917,6 +917,8 @@ main {
   flex-direction: column;
   justify-content: space-between;
   gap: 1.75rem;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .info-wrap{

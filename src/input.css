@@ -156,6 +156,7 @@ main {
 
 .container {
     @apply flex flex-col gap-7 justify-between;
+    height: fit-content;
 }
 
 .info-wrap {
