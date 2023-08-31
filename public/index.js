@@ -366,23 +366,23 @@ function fetchForecastData(weatherData, key) {
 
 function updateForecastData(data) {
     const maxMinTemps = getMaxMinForecastTemps(data);
-    const coordinates = {
-        'lat': data.city.coord.lat,
-        'lon': data.city.coord.lon
-    };
 
     updateDayNames(maxMinTemps);
     updateDailyWeather(maxMinTemps);
 }
 
-function updateDayNames (obj) {
+function updateDayNames(obj) {
     let counter = 1;
     for (let day in obj) {
-        let date = new Date(day);
-        const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-        let dayOfWeek = daysOfWeek[date.getDay()];
-        document.getElementById(`future-day-${counter}`).innerHTML = dayOfWeek;
-        counter++;
+        if (counter <= 5) { // Limit the loop to the available IDs
+            let date = new Date(day);
+            const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            let dayOfWeek = daysOfWeek[date.getDay()];
+            document.getElementById(`future-day-${counter}`).innerHTML = dayOfWeek;
+            counter++;
+        } else {
+            break; // Exit the loop when there are no more available IDs
+        }
     }
 }
 
@@ -406,12 +406,16 @@ function getMaxMinForecastTemps (data) {
     return dailyTemps;
 }
 
-function updateDailyWeather (maxMin) {
+function updateDailyWeather(maxMin) {
     let counter = 1;
-    for (let day in maxMin){
-        document.getElementById(`top-temp-${counter}`).innerHTML = maxMin[day].max + "°C";
-        document.getElementById(`bottom-temp-${counter}`).innerHTML = maxMin[day].min + "°C";
-        counter++;
+    for (let day in maxMin) {
+        if (counter <= 5) { // Limit the loop to the available IDs
+            document.getElementById(`top-temp-${counter}`).innerHTML = maxMin[day].max + "°C";
+            document.getElementById(`bottom-temp-${counter}`).innerHTML = maxMin[day].min + "°C";
+            counter++;
+        } else {
+            break; // Exit the loop when there are no more available IDs
+        }
     }
 }
 
