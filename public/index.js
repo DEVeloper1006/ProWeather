@@ -138,7 +138,7 @@ function fetchWeatherData(location) {
                 toggleTempUnit.checked = false;
                 speedToggle.checked = false;
                 directionToggle.checked = false;
-                //errScreen.classList.add('hide');
+                errScreen.classList.add('hide');
                 cityInput.value = "";
                 updateWeatherInfo(data);
                 console.log(data);
@@ -369,6 +369,7 @@ function updateForecastData(data) {
 
     updateDayNames(maxMinTemps);
     updateDailyWeather(maxMinTemps);
+    updateWeatherForecast(data);
 }
 
 function updateDayNames(obj) {
@@ -417,6 +418,60 @@ function updateDailyWeather(maxMin) {
             break; // Exit the loop when there are no more available IDs
         }
     }
+}
+
+function updateWeatherForecast (data) {
+    const forecastByDay = {};
+    data.list.forEach(entry => {
+        const timestamp = entry.dt * 1000;
+        const date = new Date(timestamp);
+        const day = date.toDateString();
+        if (!forecastByDay[day]) {
+            forecastByDay[day] = {
+                weatherInfo: []
+            }
+        }
+
+        forecastByDay[day].weatherInfo.push({
+            code: entry.weather[0].icon,
+            description: entry.weather[0].description
+        });
+    });
+
+    let count = 1;
+    for (const day in forecastByDay) {
+        if (count <= 5) {
+            const mostCommonInfo = findMostCommonInfo(forecastByDay[day].weatherInfo);
+            document.getElementById(`future-img-${count}`).src = `openweathermap/${mostCommonInfo.code}.svg`;
+            document.getElementById(`future-descr-${count++}`).innerHTML = capitalizeEachWord(mostCommonInfo.description);
+        } else break;
+    }
+}
+
+function findMostCommonInfo (infoArray) {
+    const infoCounts = {};
+    infoArray.forEach(info => {
+        const code = info.code;
+        infoCounts[code] = (infoCounts[code] || 0) + 1;
+    });
+    let mostCommonInfo = { code: '', count:0};
+    for (const code in infoCounts) {
+        if (infoCounts[code] > mostCommonInfo.count) {
+            mostCommonInfo = {code, count: infoCounts[code]};
+        }
+    }
+
+    return infoArray.find(info => info.code === mostCommonInfo.code);
+}
+
+function capitalizeEachWord (str) {
+    const parts = str.split(' ');
+    let newStr = '';
+    for (let part of parts) {
+        part = part.charAt(0).toUpperCase() + part.slice(1);
+        newStr += part + " ";
+    }
+    return newStr;
 }
 
 futureSwitch.addEventListener('change', () => {

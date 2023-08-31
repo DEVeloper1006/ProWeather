@@ -323,8 +323,11 @@ input:checked::after {
 }
 
 .future-info h2 {
-    @apply absolute right-2 opacity-5 w-full text-end;
-    font-size: 5vw;
+    @apply absolute opacity-5 w-full;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 6vw;
 }
 
 .future-weather-type {@apply flex justify-center items-center w-1/5 ml-6 gap-3;}

@@ -1244,11 +1244,12 @@ input:checked::after {
 
 .future-info h2{
   position: absolute;
-  right: 0.5rem;
   width: 100%;
-  text-align: end;
   opacity: 0.05;
-  font-size: 5vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 6vw;
 }
 
 .future-weather-type{
