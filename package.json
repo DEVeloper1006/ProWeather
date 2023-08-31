@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx tailwindcss -i ./src/input.css -o ./public/styles.css --watch",
-    "deploy": "npm run build && gh-pages -d public"
+    "build": "npx tailwindcss -i ./src/input.css -o ./public/styles.css --watch"
   },
   "author": "",
   "license": "ISC",
@@ -19,9 +18,5 @@
     "tailwindcss": "^3.3.3",
     "timezone-support": "^3.1.0",
     "toastr": "^2.1.4"
-  },
-  "devDependencies": {
-    "gh-pages": "^6.0.0"
-  },
-  "homepage": "https://DEVeloper1006.github.io/ProWeather"
+  }
 }
