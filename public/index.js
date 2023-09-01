@@ -199,7 +199,7 @@ function updateDescription (description) {
 
 function updateWeatherIcon(weatherObject) {
     let description = weatherObject.description;
-    weatherIcon.src = `/openweathermap/${weatherObject.icon}.svg`;
+    weatherIcon.src = `openweathermap/${weatherObject.icon}.svg`;
     const parts = description.split(' ');
     let newDescription = "";
     for (let part of parts) {
@@ -457,7 +457,7 @@ function updateWeatherForecast(data) {
         if (count <= 5) {
             const mostCommonInfo = findMostCommonInfo(forecastByDay[day].weatherInfo);
             if (mostCommonInfo) {
-                document.getElementById(`future-img-${count}`).src = `/openweathermap/${mostCommonInfo.code}.svg`;
+                document.getElementById(`future-img-${count}`).src = `openweathermap/${mostCommonInfo.code}.svg`;
                 document.getElementById(`future-descr-${count++}`).innerHTML = capitalizeEachWord(mostCommonInfo.description);
             }
         } else {
