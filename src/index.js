@@ -28,7 +28,7 @@ const visibilityToggle = document.getElementById('visibility-switch');
 const futureSwitch = document.getElementById('future-temp-switch');
 
 async function loadCountries() {
-    return fetch('countries.json')
+    return fetch('/public/countries.json')
         .then(response => response.json())
         .catch(error => {
             console.error(`${error}: Unable to load JSON file.`);
@@ -199,7 +199,7 @@ function updateDescription (description) {
 
 function updateWeatherIcon(weatherObject) {
     let description = weatherObject.description;
-    weatherIcon.src = `openweathermap/${weatherObject.icon}.svg`;
+    weatherIcon.src = `/public/openweathermap/${weatherObject.icon}.svg`;
     const parts = description.split(' ');
     let newDescription = "";
     for (let part of parts) {
@@ -457,7 +457,7 @@ function updateWeatherForecast(data) {
         if (count <= 5) {
             const mostCommonInfo = findMostCommonInfo(forecastByDay[day].weatherInfo);
             if (mostCommonInfo) {
-                document.getElementById(`future-img-${count}`).src = `openweathermap/${mostCommonInfo.code}.svg`;
+                document.getElementById(`future-img-${count}`).src = `/public/openweathermap/${mostCommonInfo.code}.svg`;
                 document.getElementById(`future-descr-${count++}`).innerHTML = capitalizeEachWord(mostCommonInfo.description);
             }
         } else {
