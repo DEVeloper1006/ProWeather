@@ -157,6 +157,7 @@ main {
 .container {
     @apply flex flex-col gap-7 justify-between;
     height: fit-content;
+    width: 50%;
 }
 
 .info-wrap {
@@ -242,6 +243,8 @@ input:checked::after {
 .future-weather {
     @apply w-full text-center select-none;
     height: fit-content;
+    width: 50%;
+
 }
 
 .future-weather:hover, .other-details:hover {
@@ -263,7 +266,7 @@ input:checked::after {
     flex: 1 1 50%;
 }
 
-.ss-wrap, .wind-info, .more-temp-info{
+.ss-wrap, .wind-info, .more-info{
     @apply flex flex-col justify-evenly items-center p-2 gap-3 bg-stone-900 rounded-3xl;
 }
 
@@ -279,11 +282,11 @@ input:checked::after {
     @apply flex flex-wrap justify-between items-center w-full p-7 select-none transition duration-150 ease-in-out rounded-2xl;
 }
 
-.rise-set:hover, .speed:hover, .direction:hover, .lat-lon:hover, .min-max:hover, .humidity:hover{
+.rise-set:hover, .speed:hover, .direction:hover, .lat-lon:hover, .pressure:hover, .visibility:hover, .humidity:hover {
     @apply bg-red-700 shadow-slate-50 shadow-sm;
 }
 
-.speed,.direction, .humidity, .min-max{
+.speed,.direction, .humidity, .pressure, .visibility{
     @apply flex justify-between items-center w-full select-none rounded-2xl p-7 transition duration-150 ease-linear flex-wrap;
 }
 

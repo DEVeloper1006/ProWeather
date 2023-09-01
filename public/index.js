@@ -21,16 +21,11 @@ const directionToggle = document.getElementById('direction-switch');
 const latitude = document.getElementById('lat');
 const longitude = document.getElementById('lon');
 const humidity = document.getElementById('humidity');
-const minTemp = document.getElementById('min-temperature');
-const maxTemp = document.getElementById('max-temperature');
-const tempToggle = document.getElementById('temp-switch-2');
+const pressure = document.getElementById('pressure');
+const visibility = document.getElementById('visibility');
+const pressureToggle = document.getElementById('pressure-switch');
+const visibilityToggle = document.getElementById('visibility-switch');
 const futureSwitch = document.getElementById('future-temp-switch');
-
-const futureImg1 = document.getElementById('future-img-1');
-const futureImg2 = document.getElementById('future-img-2');
-const futureImg3 = document.getElementById('future-img-3');
-const futureImg4 = document.getElementById('future-img-4');
-const futureImg5 = document.getElementById('future-img-5');
 
 async function loadCountries() {
     return fetch('countries.json')
@@ -138,10 +133,11 @@ function fetchWeatherData(location) {
                 toggleTempUnit.checked = false;
                 speedToggle.checked = false;
                 directionToggle.checked = false;
+                pressureToggle.checked = false;
+                visibilityToggle.checked = false;
                 errScreen.classList.add('hide');
                 cityInput.value = "";
                 updateWeatherInfo(data);
-                console.log(data);
                 fetchForecastData(data, apiKey);
             } else {
                 alert("City Not Found.");
@@ -161,6 +157,8 @@ function updateWeatherInfo (data) {
     updateTemperature(data.main);
     updateWeatherIcon(data.weather[0]);
     updateHumidity(data.main.humidity);
+    updatePressure(data.main.pressure);
+    updateVisibility(data.visibility);
     calcSunriseSunset(data);
     calcWindSpeed(data.wind);
     updateWindDirection(data.wind);
@@ -170,6 +168,14 @@ function updateWeatherInfo (data) {
 
 function updateHumidity (value) {
     humidity.innerHTML = Math.round(Number(value)) + "%";
+}
+
+function updatePressure (value) {
+    pressure.innerHTML = Math.round(Number(value)) + " hPa";
+}
+
+function updateVisibility (value) {
+    visibility.innerHTML = Math.round(Number(value/100)) + " km";
 }
 
 function updateLat (lat) {
@@ -185,8 +191,6 @@ function updateTemperature (tempObject) {
     let kelvinFeelsLikeTemp = tempObject.feels_like;
     temp.innerHTML = kelvinToCelsius(kelvinTemp) + "°C";
     feelsLikeTemp.innerHTML = "Feels Like " + kelvinToCelsius(kelvinFeelsLikeTemp) + "°C";
-    maxTemp.innerHTML = (kelvinToCelsius(tempObject.temp_max)) + '°C';
-    minTemp.innerHTML = (kelvinToCelsius(tempObject.temp_min)) + '°C';
 }
 
 function updateDescription (description) {
@@ -324,18 +328,6 @@ toggleTempUnit.addEventListener('change', () => {
     }
 });
 
-tempToggle.addEventListener('change', () => {
-    const oldMin = minTemp.innerHTML;
-    const oldMax = maxTemp.innerHTML; 
-    if (oldMin.endsWith('°C')) {
-        minTemp.innerHTML = celsiusToFahrenheit(spliceTemperature(oldMin)) + "°F";
-        maxTemp.innerHTML = celsiusToFahrenheit(spliceTemperature(oldMax)) + "°F";
-    } else {
-        minTemp.innerHTML = fahrenheitToCelsius(spliceTemperature(oldMin)) + "°C";
-        maxTemp.innerHTML = fahrenheitToCelsius(spliceTemperature(oldMax)) + "°C";
-    }
-});
-
 speedToggle.addEventListener('change', () => {
     const parts = windSpeed.innerHTML.split(' ');
     if (parts[1] === 'km/h') windSpeed.innerHTML = convertKMHtoMPH(Number(parts[0])) + " mph"; 
@@ -351,12 +343,32 @@ directionToggle.addEventListener('change', () => {
     }
 }); 
 
+function convertHPAtoMMHG (hPa) {
+    return Math.round(hPa * 0.75006375541921);
+} 
+
+function convertMMHGtoHPA (mmHg) {
+    return Math.round(mmHg * 1.33322387415);
+}
+
+pressureToggle.addEventListener('change', () => {
+    const parts = pressure.innerHTML.split(' ');
+    if (parts[1] === 'hPa') pressure.innerHTML = convertHPAtoMMHG(Number(parts[0])) + " mmHg";
+    else pressure.innerHTML = convertMMHGtoHPA(Number(parts[0])) + " hPa";
+});
+
+visibilityToggle.addEventListener('change', () => {
+    const parts = visibility.innerHTML.split(' ');
+    if (parts[1] === 'km') visibility.innerHTML = convertKMHtoMPH(Number(parts[0])) + ' miles';
+    else visibility.innerHTML = convertMPHtoKMH(Number(parts[0])) + ' km';
+});
+
 function fetchForecastData(weatherData, key) {
     const futureUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}&appid=${key}`;
     fetch(futureUrl)
         .then(response => response.json())
         .then(data => {
-            console.log("Forecast Data:", data);
+            futureSwitch.checked = false;
             updateForecastData(data);
         })
         .catch(error => {
@@ -420,7 +432,7 @@ function updateDailyWeather(maxMin) {
     }
 }
 
-function updateWeatherForecast (data) {
+function updateWeatherForecast(data) {
     const forecastByDay = {};
     data.list.forEach(entry => {
         const timestamp = entry.dt * 1000;
@@ -429,24 +441,31 @@ function updateWeatherForecast (data) {
         if (!forecastByDay[day]) {
             forecastByDay[day] = {
                 weatherInfo: []
-            }
+            };
         }
 
-        forecastByDay[day].weatherInfo.push({
-            code: entry.weather[0].icon,
-            description: entry.weather[0].description
-        });
+        if (entry.weather && entry.weather[0] && entry.weather[0].icon && entry.weather[0].description && entry.weather[0].icon.endsWith('d')) {
+            forecastByDay[day].weatherInfo.push({
+                code: entry.weather[0].icon,
+                description: entry.weather[0].description
+            });
+        }
     });
 
     let count = 1;
     for (const day in forecastByDay) {
         if (count <= 5) {
             const mostCommonInfo = findMostCommonInfo(forecastByDay[day].weatherInfo);
-            document.getElementById(`future-img-${count}`).src = `openweathermap/${mostCommonInfo.code}.svg`;
-            document.getElementById(`future-descr-${count++}`).innerHTML = capitalizeEachWord(mostCommonInfo.description);
-        } else break;
+            if (mostCommonInfo) {
+                document.getElementById(`future-img-${count}`).src = `openweathermap/${mostCommonInfo.code}.svg`;
+                document.getElementById(`future-descr-${count++}`).innerHTML = capitalizeEachWord(mostCommonInfo.description);
+            }
+        } else {
+            break;
+        }
     }
 }
+
 
 function findMostCommonInfo (infoArray) {
     const infoCounts = {};

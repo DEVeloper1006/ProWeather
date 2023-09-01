@@ -900,6 +900,7 @@ main {
   gap: 1.75rem;
   height: -moz-fit-content;
   height: fit-content;
+  width: 50%;
 }
 
 .info-wrap{
@@ -1036,13 +1037,13 @@ input:checked::after {
 }
 
 .future-weather{
-  width: 100%;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
   text-align: center;
   height: -moz-fit-content;
   height: fit-content;
+  width: 50%;
 }
 
 .future-weather:hover, .other-details:hover {
@@ -1079,7 +1080,7 @@ input:checked::after {
   flex: 1 1 50%;
 }
 
-.ss-wrap, .wind-info, .more-temp-info{
+.ss-wrap, .wind-info, .more-info{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1136,7 +1137,7 @@ input:checked::after {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.rise-set:hover, .speed:hover, .direction:hover, .lat-lon:hover, .min-max:hover, .humidity:hover{
+.rise-set:hover, .speed:hover, .direction:hover, .lat-lon:hover, .pressure:hover, .visibility:hover, .humidity:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(185 28 28 / var(--tw-bg-opacity));
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -1146,7 +1147,7 @@ input:checked::after {
   --tw-shadow: var(--tw-shadow-colored);
 }
 
-.speed,.direction, .humidity, .min-max{
+.speed,.direction, .humidity, .pressure, .visibility{
   display: flex;
   width: 100%;
   -webkit-user-select: none;
