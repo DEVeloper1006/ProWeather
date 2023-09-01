@@ -27,6 +27,8 @@ body {
     @apply flex justify-between items-center flex-wrap gap-10 p-10;
 }
 
+.top-container {@apply block ml-auto mr-auto};
+
 @media (max-width: 600px) {
     .top-menu {
         @apply justify-evenly;
