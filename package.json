@@ -11,7 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "country-list": "^2.3.0",
-    "firebase": "^10.3.0",
     "luxon": "^3.4.1",
     "require": "^0.4.4",
     "suncalc": "^1.9.0",
